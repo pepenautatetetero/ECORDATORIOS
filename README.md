@@ -209,6 +209,38 @@ L.marker([25.78, -100.18]).addTo(map)
   .bindPopup('Aquí estás 🚩')
   .openPopup();
 
+    // CENTROS DE RECICLAJE EN REYNOSA
+var lugares = [
+    {
+        nombre: "FYMERSA - Centro de metales ♻️",
+        coords: [26.084526395888336, -98.29755461861764],
+        info: "Recibe metales"
+    },
+    {
+        nombre: "CORSA Recicladora ♻️",
+        coords: [26.08932324746204, -98.31992874226934],
+        info: "Materiales ferrosos y no ferrosos"
+    },
+    {
+        nombre: "PLASTIREYSA ♻️",
+        coords: [26.051331045072637, -98.3733933937469],
+        info: "Centro de reciclaje de plástico"
+    }
+];
+
+// AGREGAR MARCADORES
+lugares.forEach(lugar => {
+    L.marker(lugar.coords)
+      .addTo(map)
+      .bindPopup(`<b>${lugar.nombre}</b><br>${lugar.info}`);
+});
+
+var grupo = L.featureGroup(
+    lugares.map(lugar => L.marker(lugar.coords))
+);
+
+map.fitBounds(grupo.getBounds());
+    
 // QUIZ
 const preguntas = [
 {
