@@ -281,7 +281,10 @@ window.addEventListener("load", () => {
     revisarRacha();
 });
 
+    
 <p id="rachaTexto"></p>
+
+    mostrarNotificacion("Mensaje que quieras");
 
     document.getElementById("rachaTexto").textContent =
 "Racha: " + (localStorage.getItem("racha") || 0);
