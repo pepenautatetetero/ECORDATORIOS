@@ -412,9 +412,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-L.marker([25.78, -100.18]).addTo(map)
-  .bindPopup('Aquí estás 🚩')
-  .openPopup();
+map.locate({setView: true, maxZoom: 16});
+
+map.on('locationfound', function(e) {
+    L.marker(e.latlng).addTo(map)
+      .bindPopup('Estás aquí 📍')
+      .openPopup();
+});
 
     // CENTROS DE RECICLAJE EN REYNOSA
 var lugares = [
