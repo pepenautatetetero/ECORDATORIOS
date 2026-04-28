@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Reciclatorios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -15,9 +16,11 @@
     max-width: 300px;
 }
 
-#registro select, #registro button{
-    width: 100%;
-    padding: 10px;
+#registro form{
+    background: #6c8f5e;
+    padding: 20px;
+    max-width: 400px;
+    margin: auto;
 }
     
     section h2{
@@ -25,14 +28,18 @@
     }
 
     section h3{
-        color; #eaffea;
-    }
+    color: #eaffea;
+}
 
     section ul, section ol{
         margin-left: 20px;
     }
 
-
+.header-top{
+    width: 100%;
+    box-sizing: border-box;
+}    
+    
 html{ scroll-behavior: smooth; }
 
 body{
@@ -60,7 +67,8 @@ body{
     background-color: #6c8f5e;
     display: flex;
     justify-content: center;
-    gap: 40px;
+    flex-wrap: wrap; /* 👈 importante */
+    gap: 20px;
     padding: 15px;
 }
 
@@ -70,13 +78,19 @@ body{
     font-weight: bold;
 }
 
-.principal{ padding: 50px; }
+.principal{
+    padding: 50px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
 .grid{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 15px;
 }
+
 
 .item-grande{ grid-row: span 2; }
 .item-grande img{
@@ -91,12 +105,18 @@ body{
     object-fit: cover;
 }
 
-section{ padding: 80px 40px; color: white; }
-
+section{
+    padding: 80px 40px;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
 .zona-juego{
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .objetos, .botes{
