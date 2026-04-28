@@ -563,21 +563,10 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 </section>
 
 <script>
-
-function notificacionRacha(racha){
-    if (Notification.permission === "granted") {
-        new Notification("♻️ Reciclaje", {
-            body: `🔥 Llevas ${racha} días reciclando`,
-            icon: "https://cdn-icons-png.flaticon.com/512/2909/2909767.png"
-        });
-    }
-}
-
-    
-form.addEventListener("submit", function(e){
+fform.addEventListener("submit", function(e){
     e.preventDefault();
 
-    let rachaAnterior = parseInt(localStorage.getItem("racha")) || 0;
+    let rachaAnterior = racha; // 👈 IMPORTANTE
 
     const tipo = document.getElementById("tipo").value;
     const sentimiento = document.getElementById("sentimiento").value;
@@ -604,8 +593,11 @@ form.addEventListener("submit", function(e){
     localStorage.setItem("racha", racha);
     localStorage.setItem("ultimaFecha", ultimaFecha);
 
-    // 🔔 NOTIFICACIÓN SOLO SI SUBE LA RACHA
+    // 🔔 AQUÍ VA LA NOTIFICACIÓN
     if(racha > rachaAnterior){
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
         notificacionRacha(racha);
     }
 
@@ -767,6 +759,15 @@ botes.forEach(bote => {
 
 // ===== REGISTRO DE RECICLAJE =====
 
+function notificacionRacha(racha){
+    if (Notification.permission === "granted") {
+        new Notification("♻️ Reciclaje", {
+            body: `🔥 Llevas ${racha} días reciclando`,
+            icon: "https://cdn-icons-png.flaticon.com/512/2909/2909767.png"
+        });
+    }
+}    
+
 document.addEventListener("DOMContentLoaded", function(){
 
 const form = document.getElementById("formReciclaje");
@@ -779,37 +780,6 @@ let ultimaFecha = localStorage.getItem("ultimaFecha") || null;
 
 actualizarUI();
 
-form.addEventListener("submit", function(e){
-    e.preventDefault();
-
-    const tipo = document.getElementById("tipo").value;
-    const sentimiento = document.getElementById("sentimiento").value;
-    const hoy = new Date().toDateString();
-
-    registros.push({ tipo, sentimiento, fecha: hoy });
-    localStorage.setItem("registros", JSON.stringify(registros));
-
-    if(ultimaFecha){
-        let ayer = new Date();
-        ayer.setDate(ayer.getDate() - 1);
-
-        if(new Date(ultimaFecha).toDateString() === ayer.toDateString()){
-            racha++;
-        } else if(new Date(ultimaFecha).toDateString() !== hoy){
-            racha = 1;
-        }
-    } else {
-        racha = 1;
-    }
-
-    ultimaFecha = hoy;
-
-    localStorage.setItem("racha", racha);
-    localStorage.setItem("ultimaFecha", ultimaFecha);
-
-    actualizarUI();
-    form.reset();
-});
 
 function actualizarUI(){
     historialUI.innerHTML = "";
