@@ -9,6 +9,17 @@
 
 <style>
 
+#registro form{
+    background: #6c8f5e;
+    padding: 20px;
+    max-width: 300px;
+}
+
+#registro select, #registro button{
+    width: 100%;
+    padding: 10px;
+}
+    
     section h2{
         color: #c8facc;
     }
@@ -185,6 +196,35 @@ section{ padding: 80px 40px; color: white; }
 <p id="resultadoDrag"></p>
 </section>
 
+<!-- Registro -->
+<section id="registro">
+<h2>Registro de reciclaje ♻️</h2>
+
+<form id="formReciclaje">
+    <label>¿Qué reciclaste?</label><br>
+    <select id="tipo">
+        <option value="plastico">Plástico</option>
+        <option value="vidrio">Vidrio</option>
+        <option value="papel">Papel</option>
+        <option value="organico">Orgánico</option>
+    </select><br><br>
+
+    <label>¿Cómo te sentiste?</label><br>
+    <select id="sentimiento">
+        <option value="bien">😊 Bien</option>
+        <option value="normal">😐 Normal</option>
+        <option value="mal">😞 Mal</option>
+    </select><br><br>
+
+    <button type="submit">Registrar reciclaje</button>
+</form>
+
+<h3>🔥 Racha actual: <span id="racha">0</span> días</h3>
+
+<h3>Historial</h3>
+<ul id="historial"></ul>
+
+</section>
 <!-- SECCIONES -->
 <section id="aprende">
 
@@ -556,5 +596,71 @@ botes.forEach(bote => {
     });
 });
 </script>
+
+// ===== REGISTRO DE RECICLAJE =====
+
+const form = document.getElementById("formReciclaje");
+const historialUI = document.getElementById("historial");
+const rachaUI = document.getElementById("racha");
+
+// Cargar datos guardados
+let registros = JSON.parse(localStorage.getItem("registros")) || [];
+let racha = parseInt(localStorage.getItem("racha")) || 0;
+let ultimaFecha = localStorage.getItem("ultimaFecha") || null;
+
+actualizarUI();
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const tipo = document.getElementById("tipo").value;
+    const sentimiento = document.getElementById("sentimiento").value;
+    const hoy = new Date().toDateString();
+
+    // Guardar registro
+    registros.push({
+        tipo,
+        sentimiento,
+        fecha: hoy
+    });
+
+    localStorage.setItem("registros", JSON.stringify(registros));
+
+    // ===== LÓGICA DE RACHA =====
+    if(ultimaFecha){
+        let ayer = new Date();
+        ayer.setDate(ayer.getDate() - 1);
+
+        if(new Date(ultimaFecha).toDateString() === ayer.toDateString()){
+            racha++;
+        } else if(new Date(ultimaFecha).toDateString() !== hoy){
+            racha = 1;
+        }
+    } else {
+        racha = 1;
+    }
+
+    ultimaFecha = hoy;
+
+    localStorage.setItem("racha", racha);
+    localStorage.setItem("ultimaFecha", ultimaFecha);
+
+    actualizarUI();
+    form.reset();
+});
+
+function actualizarUI(){
+    historialUI.innerHTML = "";
+
+    registros.slice().reverse().forEach(r => {
+        const li = document.createElement("li");
+        li.textContent = `${r.fecha} - ${r.tipo} - ${r.sentimiento}`;
+        historialUI.appendChild(li);
+    });
+
+    rachaUI.textContent = racha;
+}
+
+localStorage
 
 </body>
