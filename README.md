@@ -341,13 +341,70 @@ El reciclaje es una responsabilidad compartida. Adoptar hábitos correctos ayuda
 </section>
 
 <section id="objetivo">
+
 <h2>Nuestro objetivo</h2>
-<p>Concientizar sobre el reciclaje y informar de manera divertida a jovenes estudiantes acerca de la educacion ambiental, ademas de servir como recurso digital para la educacion y formacion ambiental de jovenes estudiantes de preparatoria y de secundaria. </p>
+
+<p>
+El objetivo principal de este proyecto es concientizar a la comunidad estudiantil sobre la importancia del reciclaje y el cuidado del medio ambiente. 
+A través de esta plataforma, se busca proporcionar información clara, accesible y atractiva que motive a los jóvenes a adoptar hábitos responsables en su vida diaria.
+</p>
+
+<p>
+Además, se pretende informar de manera dinámica y entretenida a estudiantes de nivel secundaria y preparatoria acerca de la educación ambiental, 
+utilizando herramientas interactivas como juegos, mapas y contenido visual. De esta forma, el aprendizaje no solo se vuelve más efectivo, 
+sino también más interesante y fácil de comprender.
+</p>
+
+<p>
+Otro de los objetivos es servir como un recurso digital educativo que pueda ser utilizado tanto por alumnos como por docentes, 
+apoyando el proceso de enseñanza-aprendizaje en temas relacionados con el reciclaje, la separación de residuos y la sostenibilidad.
+</p>
+
+<p>
+También se busca fomentar una cultura ambiental responsable, en la que los estudiantes comprendan el impacto de sus acciones en el entorno 
+y se conviertan en agentes de cambio dentro de su comunidad, promoviendo prácticas como reducir, reutilizar y reciclar.
+</p>
+
+<p>
+Finalmente, este proyecto aspira a contribuir a la formación de una sociedad más consciente, comprometida con el cuidado del planeta 
+y preparada para enfrentar los desafíos ambientales actuales y futuros.
+</p>
+
 </section>
 
 <section id="conocenos">
+
 <h2>Conócenos</h2>
-<p>Somos estudiantes del CETIS 71, que esta en Reynosa, Tamaulipas. Somos estudiantes de la carrera tecnica de administracion de recursos humanos, con nuestra tutora, la ing. Miriam Janeth Hernandez Guerrero, formamos esta pagina en respuesta a un proyecto escuela-comunidad (PEC), el cual este esta enfocado en brindar apoyo a diferentes problematicas de la comunidad del pais, en esta ocacion la pagina respoinde al tema de manejo de residuos solidos.</p>
+
+<p>
+Somos estudiantes del CETIS 71, ubicado en Reynosa, Tamaulipas. Formamos parte de la carrera técnica en Administración de Recursos Humanos y trabajamos en conjunto con nuestra tutora, la Ing. Miriam Janeth Hernández Guerrero, para desarrollar este proyecto educativo.
+</p>
+
+<p>
+Esta página fue creada como respuesta a un proyecto escuela–comunidad (PEC), el cual tiene como objetivo principal contribuir a la solución de distintas problemáticas que afectan a la sociedad. En nuestro caso, decidimos enfocarnos en el manejo de residuos sólidos, una situación que impacta directamente al medio ambiente y a la calidad de vida de las personas.
+</p>
+
+<p>
+A través de este sitio web buscamos brindar información clara, útil y accesible sobre el reciclaje, así como fomentar la conciencia ambiental en jóvenes estudiantes. También integramos herramientas interactivas, como juegos y mapas, para hacer el aprendizaje más dinámico e interesante.
+</p>
+
+<p>
+Como equipo, nos comprometemos a promover valores como la responsabilidad, el respeto por el entorno y la participación activa en el cuidado del planeta. Creemos que pequeños cambios en los hábitos diarios pueden generar un gran impacto a largo plazo.
+</p>
+
+<p>
+Este proyecto no solo representa una actividad académica, sino también una oportunidad para aportar algo positivo a nuestra comunidad y motivar a otros a sumarse al cuidado del medio ambiente.
+</p>
+
+<h3>Integrantes</h3>
+<ul>
+<li>De La Cruz Cruz Angel David</li>
+<li>Banda Guerrero Ana Sofia</li>
+<li>Epigmenio Borbolla Estrella</li>
+<li>Ramirez Ramos Melanie Zayle</li>
+<li>Uvalle Dominguez Dylan Eduardo</li>   
+</ul>
+
 </section>
 
 <script>
@@ -406,8 +463,29 @@ const preguntas = [
     pregunta: "¿Qué es el PET?",
     opciones: ["Polímero de Energía Térmica", "Polietileno Tereftalato", "Plástico transparente"],
     correcta: 1
-}
-];
+},
+    {
+    pregunta: "¿Cuantos años tarda una botella de plastico en descomponerse?",
+    opciones: ["100", "10", "500"],
+    correcta: 2
+},
+{
+    pregunta: "¿Cuantas veces el papel puede reciclarse?",
+    opciones: ["7", "2", "5"],
+    correcta: 0
+},
+    
+    {
+    pregunta: "¿Qué pais ocupa el primer lugar del ranking de paises mas comprometidos con el reciclaje?",
+    opciones: ["Alemania", "Japon", "Suiza"],
+    correcta: 0
+},
+{
+    pregunta: "Que pais es el que contamina mas?",
+    opciones: ["India", "China", "Francia"],
+    correcta: 1
+}]
+
 
 let indice = 0;
 let puntaje = 0;
