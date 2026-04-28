@@ -564,6 +564,30 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 
 <script>
 
+if ("Notification" in window) {
+    Notification.requestPermission().then(permission => {
+        console.log("Permiso:", permission);
+    });
+}
+
+    function notificacionRacha(racha){
+    if (Notification.permission === "granted") {
+        new Notification("♻️ Reciclaje", {
+            body: `🔥 Llevas ${racha} días reciclando`,
+            icon: "https://cdn-icons-png.flaticon.com/512/2909/2909767.png"
+        });
+    }
+}
+
+    let rachaAnterior = racha;
+
+if(racha > rachaAnterior){
+    notificacionRacha(racha);
+}
+
+notificacionRacha(racha);
+
+    
 // MAPA
 var map = L.map('map').setView([26.0926, -98.2770], 13);
 
