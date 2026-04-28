@@ -564,13 +564,7 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 
 <script>
 
-if ("Notification" in window) {
-    Notification.requestPermission().then(permission => {
-        console.log("Permiso:", permission);
-    });
-}
-
-    function notificacionRacha(racha){
+function notificacionRacha(racha){
     if (Notification.permission === "granted") {
         new Notification("♻️ Reciclaje", {
             body: `🔥 Llevas ${racha} días reciclando`,
@@ -579,14 +573,46 @@ if ("Notification" in window) {
     }
 }
 
-    let rachaAnterior = racha;
+    
+form.addEventListener("submit", function(e){
+    e.preventDefault();
 
-if(racha > rachaAnterior){
-    notificacionRacha(racha);
-}
+    let rachaAnterior = parseInt(localStorage.getItem("racha")) || 0;
 
-notificacionRacha(racha);
+    const tipo = document.getElementById("tipo").value;
+    const sentimiento = document.getElementById("sentimiento").value;
+    const hoy = new Date().toDateString();
 
+    registros.push({ tipo, sentimiento, fecha: hoy });
+    localStorage.setItem("registros", JSON.stringify(registros));
+
+    if(ultimaFecha){
+        let ayer = new Date();
+        ayer.setDate(ayer.getDate() - 1);
+
+        if(new Date(ultimaFecha).toDateString() === ayer.toDateString()){
+            racha++;
+        } else if(new Date(ultimaFecha).toDateString() !== hoy){
+            racha = 1;
+        }
+    } else {
+        racha = 1;
+    }
+
+    ultimaFecha = hoy;
+
+    localStorage.setItem("racha", racha);
+    localStorage.setItem("ultimaFecha", ultimaFecha);
+
+    // 🔔 NOTIFICACIÓN SOLO SI SUBE LA RACHA
+    if(racha > rachaAnterior){
+        notificacionRacha(racha);
+    }
+
+    actualizarUI();
+    form.reset();
+});
+    
     
 // MAPA
 var map = L.map('map').setView([26.0926, -98.2770], 13);
