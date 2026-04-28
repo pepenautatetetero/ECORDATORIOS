@@ -172,12 +172,134 @@ section{ padding: 80px 40px; color: white; }
 <!-- SECCIONES -->
 <section id="aprende">
 <h2>Aprende a reciclar</h2>
-<p>Aquí irá la información sobre reciclaje.</p>
+<p># Guía completa para el reciclaje de residuos: plástico, orgánicos, vidrio y papel
+
+El reciclaje es una de las estrategias más efectivas para reducir el impacto ambiental generado por los residuos sólidos. A través de la correcta separación, tratamiento y reutilización de materiales, es posible disminuir la contaminación, ahorrar recursos naturales y fomentar un modelo de desarrollo sostenible. Esta guía explica cómo reciclar adecuadamente los principales tipos de residuos: plásticos, orgánicos, vidrio y papel, así como su importancia y procesos.
+
+---
+
+## ¿Por qué es importante reciclar?
+
+El aumento de la población y del consumo ha provocado una gran acumulación de residuos. Muchos de estos materiales tardan años, décadas o incluso siglos en degradarse. El reciclaje permite:
+
+* Reducir la cantidad de basura en vertederos
+* Disminuir la contaminación del aire, suelo y agua
+* Ahorrar energía en la producción de nuevos materiales
+* Conservar recursos naturales como madera, agua y minerales
+* Fomentar una cultura ambiental responsable
+
+---
+
+## Reciclaje de plásticos
+
+Los plásticos son materiales derivados del petróleo y están presentes en envases, botellas, bolsas y productos de uso diario. Existen distintos tipos, identificados por un número dentro del símbolo de reciclaje (PET, HDPE, PVC, entre otros).
+
+### ¿Cómo reciclar plástico correctamente?
+
+1. Separar los plásticos de otros residuos
+2. Enjuagar los envases para eliminar restos de comida o líquidos
+3. Retirar tapas o etiquetas si es posible
+4. Clasificar según el tipo de plástico
+5. Depositar en el contenedor correspondiente
+
+### Proceso de reciclaje
+
+El plástico recolectado se tritura en pequeños fragmentos, se limpia, se funde y se transforma en materia prima para fabricar nuevos productos como envases, ropa sintética o mobiliario.
+
+### Beneficios
+
+* Reduce la contaminación en océanos y suelos
+* Disminuye el uso de petróleo
+* Ahorra energía en la producción industrial
+
+---
+
+## Reciclaje de residuos orgánicos
+
+Los residuos orgánicos incluyen restos de alimentos, cáscaras, hojas secas y otros materiales biodegradables.
+
+### ¿Cómo reciclarlos?
+
+La forma más común es mediante el compostaje, un proceso natural de descomposición.
+
+1. Separar residuos orgánicos de los inorgánicos
+2. Colocarlos en un recipiente o compostera
+3. Alternar capas de residuos húmedos (comida) y secos (hojas, cartón)
+4. Mantener la humedad y aireación adecuadas
+5. Esperar varias semanas hasta obtener abono natural
+
+### Beneficios
+
+* Reduce la cantidad de basura doméstica
+* Produce fertilizante natural para plantas
+* Disminuye emisiones de gases contaminantes
+
+---
+
+## Reciclaje de vidrio
+
+El vidrio es un material 100% reciclable que puede reutilizarse indefinidamente sin perder calidad.
+
+### ¿Cómo reciclar vidrio?
+
+1. Separar por colores: transparente, verde y ámbar
+2. Lavar los envases para retirar residuos
+3. Evitar mezclar con cerámica o espejos
+4. Depositar en contenedores específicos
+
+### Proceso de reciclaje
+
+El vidrio se tritura para formar “calcín”, luego se funde a altas temperaturas y se moldea para crear nuevos envases o productos.
+
+### Beneficios
+
+* Reduce el consumo de materias primas
+* Disminuye el uso de energía
+* Reduce emisiones contaminantes
+
+---
+
+## Reciclaje de papel y cartón
+
+El papel proviene de la madera, por lo que su reciclaje es clave para la conservación de los bosques.
+
+### ¿Cómo reciclar papel?
+
+1. Separar papel y cartón de otros residuos
+2. Mantenerlos limpios y secos
+3. Evitar papel con grasa o contaminantes
+4. Depositar en contenedores correspondientes
+
+### Proceso de reciclaje
+
+El papel se mezcla con agua para formar pulpa, se eliminan tintas y se reutiliza para fabricar nuevos productos como hojas, cajas y cuadernos.
+
+### Beneficios
+
+* Reduce la tala de árboles
+* Ahorra agua y energía
+* Disminuye la contaminación
+
+---
+
+## Recomendaciones generales
+
+* Practicar la separación de residuos desde casa
+* Informarse sobre los sistemas de reciclaje locales
+* Reducir el consumo de productos desechables
+* Reutilizar objetos antes de desecharlos
+* Participar en programas comunitarios de reciclaje
+
+---
+
+## Conclusión
+
+El reciclaje no solo es una acción individual, sino una responsabilidad colectiva. Adoptar hábitos correctos de separación y disposición de residuos contribuye significativamente al cuidado del medio ambiente. Al reciclar plástico, residuos orgánicos, vidrio y papel, se promueve un ciclo de aprovechamiento que beneficia tanto al planeta como a las futuras generaciones.</p>
 </section>
 
 <section id="donde">
 <h2>Dónde reciclar</h2>
-<p>Aquí pondrás lugares para reciclar.</p>
+<p>Actualmente disponemos informacion de solo los centros de reciclaje de la ciudad de Reynosa, Tamaulipas.</p>
 </section>
 
 <section id="mapa">
@@ -189,12 +311,12 @@ section{ padding: 80px 40px; color: white; }
 
 <section id="objetivo">
 <h2>Nuestro objetivo</h2>
-<p>Concientizar sobre el reciclaje.</p>
+<p>Concientizar sobre el reciclaje y informar de manera divertida a jovenes estudiantes acerca de la educacion ambiental, ademas de servir como recurso digital para la educacion y formacion ambiental de jovenes estudiantes de preparatoria y de secundaria. </p>
 </section>
 
 <section id="conocenos">
 <h2>Conócenos</h2>
-<p>Somos estudiantes del CETIS 71 en Reynosa.</p>
+<p>Somos estudiantes del CETIS 71, que esta en Reynosa, Tamaulipas. Somos estudiantes de la carrera tecnica de administracion de recursos humanos, con nuestra tutora, la ing. Miriam Janeth Hernandez Guerrero, formamos esta pagina en respuesta a un proyecto escuela-comunidad (PEC), el cual este esta enfocado en brindar apoyo a diferentes problematicas de la comunidad del pais, en esta ocacion la pagina respoinde al tema de manejo de residuos solidos.</p>
 </section>
 
 <script>
