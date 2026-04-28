@@ -595,7 +595,6 @@ botes.forEach(bote => {
         }
     });
 });
-</script>
 
 // ===== REGISTRO DE RECICLAJE =====
 
@@ -663,4 +662,6 @@ function actualizarUI(){
 
 localStorage
 
+    </script>
+    
 </body>
