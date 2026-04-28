@@ -406,7 +406,7 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 <script>
 
 // MAPA
-var map = L.map('map').setView([25.78, -100.18], 13);
+var map = L.map('map').setView([26.0926, -98.2770], 13);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
