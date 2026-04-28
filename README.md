@@ -199,6 +199,97 @@ section{ padding: 80px 40px; color: white; }
 
 <script>
 
+    // =====================
+// 🔔 SISTEMA NOTIFICACIONES
+// =====================
+
+function mostrarNotificacion(mensaje) {
+    const notif = document.createElement("div");
+    notif.textContent = mensaje;
+
+    notif.style.position = "fixed";
+    notif.style.bottom = "20px";
+    notif.style.right = "20px";
+    notif.style.background = "#000";
+    notif.style.color = "#fff";
+    notif.style.padding = "10px 15px";
+    notif.style.borderRadius = "10px";
+    notif.style.zIndex = "9999";
+    notif.style.opacity = "0";
+    notif.style.transition = "0.5s";
+
+    document.body.appendChild(notif);
+
+    setTimeout(() => notif.style.opacity = "1", 100);
+
+    setTimeout(() => {
+        notif.style.opacity = "0";
+        setTimeout(() => notif.remove(), 500);
+    }, 3000);
+}
+
+
+// =====================
+// 🔥 SISTEMA DE RACHA
+// =====================
+
+function obtenerFechaHoy() {
+    const hoy = new Date();
+    return hoy.toISOString().split("T")[0];
+}
+
+function revisarRacha() {
+    let ultimaFecha = localStorage.getItem("ultimaVisita");
+    let racha = parseInt(localStorage.getItem("racha")) || 0;
+
+    const hoy = obtenerFechaHoy();
+
+    if (!ultimaFecha) {
+        // Primera vez
+        localStorage.setItem("racha", 1);
+        localStorage.setItem("ultimaVisita", hoy);
+        mostrarNotificacion("🔥 ¡Comenzaste tu racha!");
+        return;
+    }
+
+    const ayer = new Date();
+    ayer.setDate(ayer.getDate() - 1);
+    const fechaAyer = ayer.toISOString().split("T")[0];
+
+    if (ultimaFecha === hoy) {
+        // Ya visitó hoy
+        mostrarNotificacion(`🔥 Racha actual: ${racha} días`);
+    } else if (ultimaFecha === fechaAyer) {
+        // Sigue la racha
+        racha++;
+        localStorage.setItem("racha", racha);
+        localStorage.setItem("ultimaVisita", hoy);
+        mostrarNotificacion(`🔥 ¡Racha aumentada! ${racha} días`);
+    } else {
+        // Se rompió
+        localStorage.setItem("racha", 1);
+        localStorage.setItem("ultimaVisita", hoy);
+        mostrarNotificacion("💔 Perdiste la racha... empezando de nuevo");
+    }
+}
+
+
+// =====================
+// 🚀 INICIAR SISTEMA
+// =====================
+window.addEventListener("load", () => {
+    revisarRacha();
+});
+
+    
+<p id="rachaTexto"></p>
+
+    mostrarNotificacion("Mensaje que quieras");
+
+    document.getElementById("rachaTexto").textContent =
+"Racha: " + (localStorage.getItem("racha") || 0);
+
+    
 // MAPA
 var map = L.map('map').setView([25.78, -100.18], 13);
 
@@ -206,13 +297,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-map.locate({setView: true, maxZoom: 16});
+L.marker([25.78, -100.18]).addTo(map)
+  .bindPopup('Aquí estás 🚩')
+  .openPopup();
 
-map.on('locationfound', function(e) {
-    L.marker(e.latlng).addTo(map)
-      .bindPopup("Estás aquí 📍")
-      .openPopup();
-});
     // CENTROS DE RECICLAJE EN REYNOSA
 var lugares = [
     {
@@ -244,7 +332,7 @@ var grupo = L.featureGroup(
 );
 
 map.fitBounds(grupo.getBounds());
-    
+
 // QUIZ
 const preguntas = [
 {
@@ -298,20 +386,6 @@ function siguientePregunta(){
 
 cargarPregunta();
 
-    function verificar(i){
-    const r = document.getElementById("resultado");
-    const botones = document.querySelectorAll("#opciones button");
-
-    botones.forEach(b => b.disabled = true);
-
-    if(i===preguntas[indice].correcta){
-        r.textContent = "¡Correcto! ✅";
-        puntaje++;
-    } else {
-        r.textContent = "Incorrecto ❌";
-    }
-}
-
 // DRAG & DROP
 const items = document.querySelectorAll(".item");
 const botes = document.querySelectorAll(".bote");
@@ -330,7 +404,8 @@ botes.forEach(bote => {
         const tipoBote = bote.getAttribute("data-tipo");
         const idItem = arrastrado.id;
 
-<div class="item" draggable="true" data-tipo="plastico">Botella</div>        const resultado = document.getElementById("resultadoDrag");
+        let correcto = idItem.includes(tipoBote);
+        const resultado = document.getElementById("resultadoDrag");
 
         if(correcto){
             resultado.textContent = "¡Correcto! ✅";
@@ -340,10 +415,6 @@ botes.forEach(bote => {
         }
     });
 });
-
-const tipoItem = arrastrado.getAttribute("data-tipo");
-let correcto = tipoItem === tipoBote;
-    
 </script>
 
 </body>
