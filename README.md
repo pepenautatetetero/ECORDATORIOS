@@ -199,97 +199,6 @@ section{ padding: 80px 40px; color: white; }
 
 <script>
 
-    // =====================
-// 🔔 SISTEMA NOTIFICACIONES
-// =====================
-
-function mostrarNotificacion(mensaje) {
-    const notif = document.createElement("div");
-    notif.textContent = mensaje;
-
-    notif.style.position = "fixed";
-    notif.style.bottom = "20px";
-    notif.style.right = "20px";
-    notif.style.background = "#000";
-    notif.style.color = "#fff";
-    notif.style.padding = "10px 15px";
-    notif.style.borderRadius = "10px";
-    notif.style.zIndex = "9999";
-    notif.style.opacity = "0";
-    notif.style.transition = "0.5s";
-
-    document.body.appendChild(notif);
-
-    setTimeout(() => notif.style.opacity = "1", 100);
-
-    setTimeout(() => {
-        notif.style.opacity = "0";
-        setTimeout(() => notif.remove(), 500);
-    }, 3000);
-}
-
-
-// =====================
-// 🔥 SISTEMA DE RACHA
-// =====================
-
-function obtenerFechaHoy() {
-    const hoy = new Date();
-    return hoy.toISOString().split("T")[0];
-}
-
-function revisarRacha() {
-    let ultimaFecha = localStorage.getItem("ultimaVisita");
-    let racha = parseInt(localStorage.getItem("racha")) || 0;
-
-    const hoy = obtenerFechaHoy();
-
-    if (!ultimaFecha) {
-        // Primera vez
-        localStorage.setItem("racha", 1);
-        localStorage.setItem("ultimaVisita", hoy);
-        mostrarNotificacion("🔥 ¡Comenzaste tu racha!");
-        return;
-    }
-
-    const ayer = new Date();
-    ayer.setDate(ayer.getDate() - 1);
-    const fechaAyer = ayer.toISOString().split("T")[0];
-
-    if (ultimaFecha === hoy) {
-        // Ya visitó hoy
-        mostrarNotificacion(`🔥 Racha actual: ${racha} días`);
-    } else if (ultimaFecha === fechaAyer) {
-        // Sigue la racha
-        racha++;
-        localStorage.setItem("racha", racha);
-        localStorage.setItem("ultimaVisita", hoy);
-        mostrarNotificacion(`🔥 ¡Racha aumentada! ${racha} días`);
-    } else {
-        // Se rompió
-        localStorage.setItem("racha", 1);
-        localStorage.setItem("ultimaVisita", hoy);
-        mostrarNotificacion("💔 Perdiste la racha... empezando de nuevo");
-    }
-}
-
-
-// =====================
-// 🚀 INICIAR SISTEMA
-// =====================
-window.addEventListener("load", () => {
-    revisarRacha();
-});
-
-    
-<p id="rachaTexto"></p>
-
-    mostrarNotificacion("Mensaje que quieras");
-
-    document.getElementById("rachaTexto").textContent =
-"Racha: " + (localStorage.getItem("racha") || 0);
-
-    
 // MAPA
 var map = L.map('map').setView([25.78, -100.18], 13);
 
@@ -332,7 +241,7 @@ var grupo = L.featureGroup(
 );
 
 map.fitBounds(grupo.getBounds());
-
+    
 // QUIZ
 const preguntas = [
 {
@@ -418,4 +327,3 @@ botes.forEach(bote => {
 </script>
 
 </body>
-</html>
