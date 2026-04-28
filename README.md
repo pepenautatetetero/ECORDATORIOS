@@ -36,16 +36,20 @@
     }
 
 .header-top{
-    width: 100%;
-    box-sizing: border-box;
-}    
+    background-color: #a8c3a0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
     
 html{ scroll-behavior: smooth; }
 
 body{
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: #3f6b3f;
+    background: linear-gradient(135deg, #3f6b3f, #2e4d2e);
 }
 
 #map{ height: 400px; }
@@ -111,6 +115,11 @@ section{
     width: 100%;
     box-sizing: border-box;
 }
+
+    section{
+    padding: 60px 20px;
+}
+    
 .zona-juego{
     display: flex;
     justify-content: space-between;
@@ -140,7 +149,13 @@ section{
     min-width: 120px;
 }
 
-    
+.contenedor{
+    max-width: 1200px;
+    margin: auto;
+    background: rgba(0,0,0,0.15);
+    padding: 30px;
+    border-radius: 15px;
+}    
 </style>
 </head>
 
@@ -185,7 +200,8 @@ section{
 
 <!-- JUEGOS -->
 <section id="juegos">
-<h2>Juegos</h2>
+<div class="contenedor">
+    <h2>Juegos</h2>
 
 <h3>Quiz ♻️</h3>
 <p id="pregunta"></p>
@@ -214,11 +230,13 @@ section{
 </div>
 
 <p id="resultadoDrag"></p>
+</div>
 </section>
 
 <!-- Registro -->
 <section id="registro">
-<h2>Registro de reciclaje ♻️</h2>
+    <div class="contenedor">
+        <h2>Registro de reciclaje ♻️</h2>
 
 <form id="formReciclaje">
     <label>¿Qué reciclaste?</label><br>
@@ -244,10 +262,12 @@ section{
 <h3>Historial</h3>
 <ul id="historial"></ul>
 
+</div>
 </section>
+
 <!-- SECCIONES -->
 <section id="aprende">
-
+<div class="contenedor">
 <h2>Aprende a reciclar</h2>
 
 <h3>Guía completa para el reciclaje de residuos: plástico, orgánicos, vidrio y papel</h3>
@@ -386,22 +406,26 @@ Los plásticos son materiales derivados del petróleo y están presentes en enva
 El reciclaje es una responsabilidad compartida. Adoptar hábitos correctos ayuda a cuidar el medio ambiente y a construir un futuro más sostenible.
 </p>
 
+</div>
 </section>
 
 <section id="donde">
-<h2>Dónde reciclar</h2>
+    <div class="contenedor">
+        <h2>Dónde reciclar</h2>
 <p>Actualmente disponemos informacion de solo los centros de reciclaje de la ciudad de Reynosa, Tamaulipas.</p>
 </section>
 
 <section id="mapa">
-    <h2>Mapa de reciclaje 🗺️</h2>
+    <div class="contenedor">
+        <h2>Mapa de reciclaje 🗺️</h2>
     <p>Ubicación de puntos de reciclaje.</p>
 
     <div id="map"></div>
+</div>
 </section>
 
 <section id="objetivo">
-
+<div class="contenedor">
 <h2>Nuestro objetivo</h2>
 
 <p>
@@ -430,10 +454,11 @@ Finalmente, este proyecto aspira a contribuir a la formación de una sociedad m�
 y preparada para enfrentar los desafíos ambientales actuales y futuros.
 </p>
 
+</div>
 </section>
 
 <section id="conocenos">
-
+<div class="contenedor">
 <h2>Conócenos</h2>
 
 <p>Somos estudiantes del CETIS 71, ubicado en Reynosa, Tamaulipas. Formamos parte de la carrera técnica en Administración de Recursos Humanos y trabajamos en conjunto con nuestra tutora, la Ing. Miriam Janeth Hernández Guerrero, para desarrollar este proyecto educativo.</p>
@@ -461,6 +486,7 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 <li>Uvalle Dominguez Dylan Eduardo</li>   
 </ul>
 
+</div>
 </section>
 
 <script>
