@@ -376,13 +376,9 @@ y preparada para enfrentar los desafíos ambientales actuales y futuros.
 
 <h2>Conócenos</h2>
 
-<p>
-Somos estudiantes del CETIS 71, ubicado en Reynosa, Tamaulipas. Formamos parte de la carrera técnica en Administración de Recursos Humanos y trabajamos en conjunto con nuestra tutora, la Ing. Miriam Janeth Hernández Guerrero, para desarrollar este proyecto educativo.
-</p>
+<p>Somos estudiantes del CETIS 71, ubicado en Reynosa, Tamaulipas. Formamos parte de la carrera técnica en Administración de Recursos Humanos y trabajamos en conjunto con nuestra tutora, la Ing. Miriam Janeth Hernández Guerrero, para desarrollar este proyecto educativo.</p>
 
-<p>
-Esta página fue creada como respuesta a un proyecto escuela–comunidad (PEC), el cual tiene como objetivo principal contribuir a la solución de distintas problemáticas que afectan a la sociedad. En nuestro caso, decidimos enfocarnos en el manejo de residuos sólidos, una situación que impacta directamente al medio ambiente y a la calidad de vida de las personas.
-</p>
+<p>Esta página fue creada como respuesta a un proyecto escuela–comunidad (PEC), el cual tiene como objetivo principal contribuir a la solución de distintas problemáticas que afectan a la sociedad. En nuestro caso, decidimos enfocarnos en el manejo de residuos sólidos, una situación que impacta directamente al medio ambiente y a la calidad de vida de las personas.</p>
 
 <p>
 A través de este sitio web buscamos brindar información clara, útil y accesible sobre el reciclaje, así como fomentar la conciencia ambiental en jóvenes estudiantes. También integramos herramientas interactivas, como juegos y mapas, para hacer el aprendizaje más dinámico e interesante.
