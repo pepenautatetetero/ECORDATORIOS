@@ -8,6 +8,20 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
+
+    section h2{
+        color: #c8facc;
+    }
+
+    section h3{
+        color; #eaffea;
+    }
+
+    section ul, section ol{
+        margin-left: 20px;
+    }
+
+
 html{ scroll-behavior: smooth; }
 
 body{
@@ -94,6 +108,8 @@ section{ padding: 80px 40px; color: white; }
     text-align: center;
     min-width: 120px;
 }
+
+    
 </style>
 </head>
 
@@ -171,130 +187,145 @@ section{ padding: 80px 40px; color: white; }
 
 <!-- SECCIONES -->
 <section id="aprende">
+
 <h2>Aprende a reciclar</h2>
-<p># Guía completa para el reciclaje de residuos: plástico, orgánicos, vidrio y papel
 
-El reciclaje es una de las estrategias más efectivas para reducir el impacto ambiental generado por los residuos sólidos. A través de la correcta separación, tratamiento y reutilización de materiales, es posible disminuir la contaminación, ahorrar recursos naturales y fomentar un modelo de desarrollo sostenible. Esta guía explica cómo reciclar adecuadamente los principales tipos de residuos: plásticos, orgánicos, vidrio y papel, así como su importancia y procesos.
+<h3>Guía completa para el reciclaje de residuos: plástico, orgánicos, vidrio y papel</h3>
 
----
+<p>
+El reciclaje es una de las estrategias más efectivas para reducir el impacto ambiental generado por los residuos sólidos. 
+A través de la correcta separación, tratamiento y reutilización de materiales, es posible disminuir la contaminación, 
+ahorrar recursos naturales y fomentar un modelo de desarrollo sostenible.
+</p>
+
+<p>
+Esta guía explica cómo reciclar adecuadamente los principales tipos de residuos: plásticos, orgánicos, vidrio y papel, 
+así como su importancia y procesos.
+</p>
+
+<hr>
 
 <h2>¿Por qué es importante reciclar?</h2>
 
-<p>El aumento de la población y del consumo ha provocado una gran acumulación de residuos. Muchos de estos materiales tardan años, décadas o incluso siglos en degradarse. El reciclaje permite:
+<ul>
+<li>Reducir la cantidad de basura en vertederos</li>
+<li>Disminuir la contaminación del aire, suelo y agua</li>
+<li>Ahorrar energía en la producción de nuevos materiales</li>
+<li>Conservar recursos naturales como madera, agua y minerales</li>
+<li>Fomentar una cultura ambiental responsable</li>
+</ul>
 
-* Reducir la cantidad de basura en vertederos
-* Disminuir la contaminación del aire, suelo y agua
-* Ahorrar energía en la producción de nuevos materiales
-* Conservar recursos naturales como madera, agua y minerales
-* Fomentar una cultura ambiental responsable</p>
-
----
+<hr>
 
 <h2>Reciclaje de plásticos</h2>
 
-Los plásticos son materiales derivados del petróleo y están presentes en envases, botellas, bolsas y productos de uso diario. Existen distintos tipos, identificados por un número dentro del símbolo de reciclaje (PET, HDPE, PVC, entre otros).
+<p>
+Los plásticos son materiales derivados del petróleo y están presentes en envases, botellas, bolsas y productos de uso diario.
+</p>
 
-### ¿Cómo reciclar plástico correctamente?
+<h3>¿Cómo reciclar plástico correctamente?</h3>
 
-1. Separar los plásticos de otros residuos
-2. Enjuagar los envases para eliminar restos de comida o líquidos
-3. Retirar tapas o etiquetas si es posible
-4. Clasificar según el tipo de plástico
-5. Depositar en el contenedor correspondiente
+<ol>
+<li>Separar los plásticos de otros residuos</li>
+<li>Enjuagar los envases</li>
+<li>Retirar tapas o etiquetas</li>
+<li>Clasificar por tipo</li>
+<li>Depositar en el contenedor correcto</li>
+</ol>
 
-### Proceso de reciclaje
+<h3>Beneficios</h3>
 
-El plástico recolectado se tritura en pequeños fragmentos, se limpia, se funde y se transforma en materia prima para fabricar nuevos productos como envases, ropa sintética o mobiliario.
+<ul>
+<li>Reduce la contaminación</li>
+<li>Disminuye el uso de petróleo</li>
+<li>Ahorra energía</li>
+</ul>
 
-### Beneficios
+<hr>
 
-* Reduce la contaminación en océanos y suelos
-* Disminuye el uso de petróleo
-* Ahorra energía en la producción industrial
+<h2>Reciclaje de residuos orgánicos</h2>
 
----
+<p>Incluyen restos de comida, cáscaras y hojas.</p>
 
-## Reciclaje de residuos orgánicos
+<h3>¿Cómo reciclarlos?</h3>
 
-Los residuos orgánicos incluyen restos de alimentos, cáscaras, hojas secas y otros materiales biodegradables.
+<ol>
+<li>Separar residuos orgánicos</li>
+<li>Usar una compostera</li>
+<li>Mezclar residuos húmedos y secos</li>
+<li>Mantener ventilación</li>
+<li>Esperar a que se forme abono</li>
+</ol>
 
-### ¿Cómo reciclarlos?
+<h3>Beneficios</h3>
 
-La forma más común es mediante el compostaje, un proceso natural de descomposición.
+<ul>
+<li>Reduce basura</li>
+<li>Produce fertilizante natural</li>
+<li>Disminuye contaminación</li>
+</ul>
 
-1. Separar residuos orgánicos de los inorgánicos
-2. Colocarlos en un recipiente o compostera
-3. Alternar capas de residuos húmedos (comida) y secos (hojas, cartón)
-4. Mantener la humedad y aireación adecuadas
-5. Esperar varias semanas hasta obtener abono natural
+<hr>
 
-### Beneficios
+<h2>Reciclaje de vidrio</h2>
 
-* Reduce la cantidad de basura doméstica
-* Produce fertilizante natural para plantas
-* Disminuye emisiones de gases contaminantes
+<h3>¿Cómo reciclar vidrio?</h3>
 
----
+<ol>
+<li>Separar por color</li>
+<li>Lavar envases</li>
+<li>No mezclar con cerámica</li>
+<li>Depositar en contenedores</li>
+</ol>
 
-## Reciclaje de vidrio
+<h3>Beneficios</h3>
 
-El vidrio es un material 100% reciclable que puede reutilizarse indefinidamente sin perder calidad.
+<ul>
+<li>100% reciclable</li>
+<li>Ahorra energía</li>
+<li>Reduce emisiones</li>
+</ul>
 
-### ¿Cómo reciclar vidrio?
+<hr>
 
-1. Separar por colores: transparente, verde y ámbar
-2. Lavar los envases para retirar residuos
-3. Evitar mezclar con cerámica o espejos
-4. Depositar en contenedores específicos
+<h2>Reciclaje de papel y cartón</h2>
 
-### Proceso de reciclaje
+<h3>¿Cómo reciclar papel?</h3>
 
-El vidrio se tritura para formar “calcín”, luego se funde a altas temperaturas y se moldea para crear nuevos envases o productos.
+<ol>
+<li>Separar papel limpio</li>
+<li>Evitar humedad</li>
+<li>No incluir papel sucio</li>
+<li>Depositar correctamente</li>
+</ol>
 
-### Beneficios
+<h3>Beneficios</h3>
 
-* Reduce el consumo de materias primas
-* Disminuye el uso de energía
-* Reduce emisiones contaminantes
+<ul>
+<li>Reduce tala de árboles</li>
+<li>Ahorra agua</li>
+<li>Disminuye contaminación</li>
+</ul>
 
----
+<hr>
 
-## Reciclaje de papel y cartón
+<h2>Recomendaciones generales</h2>
 
-El papel proviene de la madera, por lo que su reciclaje es clave para la conservación de los bosques.
+<ul>
+<li>Separar residuos desde casa</li>
+<li>Reducir el consumo</li>
+<li>Reutilizar materiales</li>
+<li>Participar en programas de reciclaje</li>
+</ul>
 
-### ¿Cómo reciclar papel?
+<hr>
 
-1. Separar papel y cartón de otros residuos
-2. Mantenerlos limpios y secos
-3. Evitar papel con grasa o contaminantes
-4. Depositar en contenedores correspondientes
+<h2>Conclusión</h2>
 
-### Proceso de reciclaje
+<p>
+El reciclaje es una responsabilidad compartida. Adoptar hábitos correctos ayuda a cuidar el medio ambiente y a construir un futuro más sostenible.
+</p>
 
-El papel se mezcla con agua para formar pulpa, se eliminan tintas y se reutiliza para fabricar nuevos productos como hojas, cajas y cuadernos.
-
-### Beneficios
-
-* Reduce la tala de árboles
-* Ahorra agua y energía
-* Disminuye la contaminación
-
----
-
-## Recomendaciones generales
-
-* Practicar la separación de residuos desde casa
-* Informarse sobre los sistemas de reciclaje locales
-* Reducir el consumo de productos desechables
-* Reutilizar objetos antes de desecharlos
-* Participar en programas comunitarios de reciclaje
-
----
-
-## Conclusión
-
-El reciclaje no solo es una acción individual, sino una responsabilidad colectiva. Adoptar hábitos correctos de separación y disposición de residuos contribuye significativamente al cuidado del medio ambiente. Al reciclar plástico, residuos orgánicos, vidrio y papel, se promueve un ciclo de aprovechamiento que beneficia tanto al planeta como a las futuras generaciones.</p>
 </section>
 
 <section id="donde">
