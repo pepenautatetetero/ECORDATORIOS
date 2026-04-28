@@ -40,7 +40,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    padding: 30px 60px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
     
