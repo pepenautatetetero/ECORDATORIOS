@@ -124,6 +124,9 @@ section{
     section{
     padding: 60px 20px;
 }
+    section{
+    color: white;
+}    
     
 .zona-juego{
     display: flex;
