@@ -48,18 +48,15 @@ html{ scroll-behavior: smooth; }
 
 body{
     margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: linear-gradient(135deg, #3f6b3f, #2e4d2e);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(180deg, #2e5e2e, #3f6b3f);
 }
 
 #map{ height: 400px; }
 
 .header-top{
-    background-color: #a8c3a0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
+    background: linear-gradient(90deg, #a8c3a0, #6c8f5e);
+    border-bottom: 3px solid #4a6b4a;
 }
 
 .header-top h1{ margin: 0; }
@@ -80,6 +77,12 @@ body{
     text-decoration: none;
     color: black;
     font-weight: bold;
+    transition: 0.3s;
+}
+
+.menu a:hover{
+    color: white;
+    transform: scale(1.1);
 }
 
 .principal{
@@ -110,12 +113,14 @@ body{
 }
 
 section{
-    padding: 80px 40px;
-    color: white;
-    width: 100%;
-    box-sizing: border-box;
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
 }
-
     section{
     padding: 60px 20px;
 }
@@ -156,6 +161,71 @@ section{
     padding: 30px;
     border-radius: 15px;
 }    
+
+.grid img, .item-grande img{
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.grid img:hover{
+    transform: scale(1.05);
+}
+
+.item{
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.item:hover{
+    transform: scale(1.05);
+    background: #dfffe0;
+}
+
+.bote{
+    border-radius: 15px;
+    transition: 0.2s;
+}
+
+.bote:hover{
+    background: #c8facc;
+}
+
+#registro form{
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+button{
+    background: #c8facc;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover{
+    background: #a8f0b0;
+}
+
+#racha{
+    font-size: 30px;
+    color: #c8facc;
+    font-weight: bold;
+}
+
+section{
+    animation: aparecer 0.6s ease;
+}
+
+@keyframes aparecer{
+    from{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 </style>
 </head>
 
