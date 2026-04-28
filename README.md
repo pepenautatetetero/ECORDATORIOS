@@ -598,11 +598,12 @@ botes.forEach(bote => {
 
 // ===== REGISTRO DE RECICLAJE =====
 
+document.addEventListener("DOMContentLoaded", function(){
+
 const form = document.getElementById("formReciclaje");
 const historialUI = document.getElementById("historial");
 const rachaUI = document.getElementById("racha");
 
-// Cargar datos guardados
 let registros = JSON.parse(localStorage.getItem("registros")) || [];
 let racha = parseInt(localStorage.getItem("racha")) || 0;
 let ultimaFecha = localStorage.getItem("ultimaFecha") || null;
@@ -616,16 +617,9 @@ form.addEventListener("submit", function(e){
     const sentimiento = document.getElementById("sentimiento").value;
     const hoy = new Date().toDateString();
 
-    // Guardar registro
-    registros.push({
-        tipo,
-        sentimiento,
-        fecha: hoy
-    });
-
+    registros.push({ tipo, sentimiento, fecha: hoy });
     localStorage.setItem("registros", JSON.stringify(registros));
 
-    // ===== LÓGICA DE RACHA =====
     if(ultimaFecha){
         let ayer = new Date();
         ayer.setDate(ayer.getDate() - 1);
@@ -660,8 +654,7 @@ function actualizarUI(){
     rachaUI.textContent = racha;
 }
 
-localStorage
-
+});
     </script>
     
 </body>
