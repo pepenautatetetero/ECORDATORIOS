@@ -178,19 +178,19 @@ El reciclaje es una de las estrategias más efectivas para reducir el impacto am
 
 ---
 
-## ¿Por qué es importante reciclar?
+<h2>¿Por qué es importante reciclar?</h2>
 
-El aumento de la población y del consumo ha provocado una gran acumulación de residuos. Muchos de estos materiales tardan años, décadas o incluso siglos en degradarse. El reciclaje permite:
+<p>El aumento de la población y del consumo ha provocado una gran acumulación de residuos. Muchos de estos materiales tardan años, décadas o incluso siglos en degradarse. El reciclaje permite:
 
 * Reducir la cantidad de basura en vertederos
 * Disminuir la contaminación del aire, suelo y agua
 * Ahorrar energía en la producción de nuevos materiales
 * Conservar recursos naturales como madera, agua y minerales
-* Fomentar una cultura ambiental responsable
+* Fomentar una cultura ambiental responsable</p>
 
 ---
 
-## Reciclaje de plásticos
+<h2>Reciclaje de plásticos</h2>
 
 Los plásticos son materiales derivados del petróleo y están presentes en envases, botellas, bolsas y productos de uso diario. Existen distintos tipos, identificados por un número dentro del símbolo de reciclaje (PET, HDPE, PVC, entre otros).
 
