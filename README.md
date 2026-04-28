@@ -206,10 +206,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
 
-L.marker([25.78, -100.18]).addTo(map)
-  .bindPopup('Aquí estás 🚩')
-  .openPopup();
+map.locate({setView: true, maxZoom: 16});
 
+map.on('locationfound', function(e) {
+    L.marker(e.latlng).addTo(map)
+      .bindPopup("Estás aquí 📍")
+      .openPopup();
+});
     // CENTROS DE RECICLAJE EN REYNOSA
 var lugares = [
     {
@@ -295,6 +298,20 @@ function siguientePregunta(){
 
 cargarPregunta();
 
+    function verificar(i){
+    const r = document.getElementById("resultado");
+    const botones = document.querySelectorAll("#opciones button");
+
+    botones.forEach(b => b.disabled = true);
+
+    if(i===preguntas[indice].correcta){
+        r.textContent = "¡Correcto! ✅";
+        puntaje++;
+    } else {
+        r.textContent = "Incorrecto ❌";
+    }
+}
+
 // DRAG & DROP
 const items = document.querySelectorAll(".item");
 const botes = document.querySelectorAll(".bote");
@@ -313,8 +330,7 @@ botes.forEach(bote => {
         const tipoBote = bote.getAttribute("data-tipo");
         const idItem = arrastrado.id;
 
-        let correcto = idItem.includes(tipoBote);
-        const resultado = document.getElementById("resultadoDrag");
+<div class="item" draggable="true" data-tipo="plastico">Botella</div>        const resultado = document.getElementById("resultadoDrag");
 
         if(correcto){
             resultado.textContent = "¡Correcto! ✅";
@@ -324,6 +340,10 @@ botes.forEach(bote => {
         }
     });
 });
+
+const tipoItem = arrastrado.getAttribute("data-tipo");
+let correcto = tipoItem === tipoBote;
+    
 </script>
 
 </body>
