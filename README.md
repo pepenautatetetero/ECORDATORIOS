@@ -618,9 +618,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
+  apiKey: const firebaseConfig = {
+  apiKey: "AIzaSyDw2Ilq75kQrf5trROBqqRyhwgAeMRYQKQ",
   authDomain: "ecordatorios.firebaseapp.com",
   projectId: "ecordatorios",
+  storageBucket: "ecordatorios.firebasestorage.app",
+  messagingSenderId: "872970549143",
+  appId: "1:872970549143:web:42f094e018078d0b9a76d2"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -657,21 +661,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ===== QUIZ =====
     const preguntas = [
-        { pregunta:"¿Qué significan las 3R?", opciones:["Reciclar, Reducir, Reutilizar","Otra"], correcta:0 },
-    ];
-
-    let indice = 0;
-
-    function cargarPregunta(){
-        document.getElementById("pregunta").textContent = preguntas[indice].pregunta;
+    {
+        pregunta: "¿Qué significan las 3R?",
+        opciones: ["Reciclar, Reducir, Reutilizar", "Otra"],
+        correcta: 0
     }
+];
 
-    window.siguientePregunta = () => {
-        indice++;
-        cargarPregunta();
-    };
+let indice = 0;
 
+function cargarPregunta(){
+    const p = document.getElementById("pregunta");
+    const op = document.getElementById("opciones");
+
+    p.textContent = preguntas[indice].pregunta;
+    op.innerHTML = "";
+
+    preguntas[indice].opciones.forEach((o,i)=>{
+        const btn = document.createElement("button");
+        btn.textContent = o;
+        btn.onclick = () => {
+            document.getElementById("resultado").textContent =
+                i === preguntas[indice].correcta ? "Correcto ✅" : "Incorrecto ❌";
+        };
+        op.appendChild(btn);
+    });
+}
+
+window.siguientePregunta = () => {
+    indice = (indice + 1) % preguntas.length;
     cargarPregunta();
+};
+
+cargarPregunta();
 
     // ===== DRAG =====
     let arrastrado;
@@ -687,7 +709,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const correcto = arrastrado.id.includes(b.dataset.tipo);
             document.getElementById("resultadoDrag").textContent =
                 correcto ? "Correcto ✅" : "Incorrecto ❌";
-        });
+            if(correcto){
+    arrastrado.style.display = "none";
+         });
     });
 
     // ===== TEMA =====
