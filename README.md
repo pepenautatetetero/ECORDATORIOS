@@ -354,9 +354,9 @@ section{
 
 <h3> Skins desbloqueables</h3>
 
-<button class="skin-btn" onclick="cambiarTema('verde')">Verde</button>
-<button class="skin-btn" onclick="cambiarTema('azul')">Azul</button>
-<button class="skin-btn" onclick="cambiarTema('oscuro')">Oscuro</button>
+<button onclick="cambiarTema('verde')">Verde</button>
+<button onclick="cambiarTema('azul')">Azul</button>
+<button onclick="cambiarTema('oscuro')">Oscuro</button>
 </div>
 </section>
 
@@ -693,6 +693,7 @@ onSnapshot(q, (snapshot) => {
     });
 });    
 // MAPA
+var map = L.map('map').setView([26.0926, -98.2770], 13);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
@@ -839,6 +840,11 @@ botes.forEach(bote => {
         }
     });
 });
+function cambiarTema(tema){
+    document.body.classList.remove("verde", "azul", "oscuro");
+    document.body.classList.add(tema);
+    localStorage.setItem("tema", tema);
+}
 
 function cargarTema(){
     const tema = localStorage.getItem("tema") || "verde";
@@ -847,41 +853,6 @@ function cargarTema(){
     document.body.classList.add(tema);
 }
 
-const skins = {
-    verde: 0,
-    azul: 10000,
-    oscuro: 20000
-};
-
-    function cambiarTema(tema){
-    const puntos = parseInt(localStorage.getItem("puntos")) || 0;
-
-    if(puntos < skins[tema]){
-        alert("🚫 No tienes suficientes puntos para esta skin");
-        return;
-    }
-
-    document.body.classList.remove("verde", "azul", "oscuro");
-    document.body.classList.add(tema);
-    localStorage.setItem("tema", tema);
-}
-
-    function actualizarBotonesSkins(){
-    const puntos = parseInt(localStorage.getItem("puntos")) || 0;
-
-    document.querySelectorAll(".skin-btn").forEach(btn => {
-        const tema = btn.getAttribute("onclick")?.match(/'(.+)'/)?.[1];
-
-        if(tema && puntos < skins[tema]){
-            btn.disabled = true;
-            btn.style.opacity = "0.5";
-        } else {
-            btn.disabled = false;
-            btn.style.opacity = "1";
-        }
-    });
-}
-    
 window.cambiarTema = cambiarTema;
 window.cargarTema = cargarTema;
     
@@ -898,9 +869,9 @@ function notificacionRacha(racha){
 }
 
 function obtenerNivel(puntos){
-    if(puntos >= 30000) return "🌍 Maestro del Reciclaje";
-    if(puntos >= 10000) return "♻️ Experto";
-    if(puntos >= 5000) return "🌱 Intermedio";
+    if(puntos >= 200) return "🌍 Maestro del Reciclaje";
+    if(puntos >= 100) return "♻️ Experto";
+    if(puntos >= 50) return "🌱 Intermedio";
     return "🟢 Novato";
 }
 
@@ -923,6 +894,8 @@ function verificarInsignias(puntos, racha, insignias){
 // ===== APP =====
 
 document.addEventListener("DOMContentLoaded", function(){
+
+document.addEventListener("DOMContentLoaded", () => {
 
     var map = L.map('map').setView([26.0926, -98.2770], 13);
 
@@ -984,8 +957,7 @@ document.addEventListener("DOMContentLoaded", function(){
     let insignias = JSON.parse(localStorage.getItem("insignias")) || [];
 
     actualizarUI();
-    actualizarBotonesSkins();
-      
+
     form.addEventListener("submit", function(e){
         e.preventDefault();
 
@@ -1037,28 +1009,28 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     function actualizarUI(){
-    historialUI.innerHTML = "";
+        historialUI.innerHTML = "";
 
-    registros.slice().reverse().forEach(r => {
-        const li = document.createElement("li");
-        li.textContent = `${r.fecha} - ${r.tipo} - ${r.sentimiento}`;
-        historialUI.appendChild(li);
-    });
+        registros.slice().reverse().forEach(r => {
+            const li = document.createElement("li");
+            li.textContent = `${r.fecha} - ${r.tipo} - ${r.sentimiento}`;
+            historialUI.appendChild(li);
+        });
 
-    rachaUI.textContent = racha;
-    document.getElementById("puntos").textContent = puntos;
-    document.getElementById("nivel").textContent = obtenerNivel(puntos);
+        rachaUI.textContent = racha;
+        document.getElementById("puntos").textContent = puntos;
+        document.getElementById("nivel").textContent = obtenerNivel(puntos);
 
-    const lista = document.getElementById("insignias");
-    lista.innerHTML = "";
+        const lista = document.getElementById("insignias");
+        lista.innerHTML = "";
 
-    insignias.forEach(i => {
-        const li = document.createElement("li");
-        li.textContent = i;
-        lista.appendChild(li);
-    });
+        insignias.forEach(i => {
+            const li = document.createElement("li");
+            li.textContent = i;
+            lista.appendChild(li);
+        });
+    }
 
-    actualizarBotonesSkins();
 });
 
 
