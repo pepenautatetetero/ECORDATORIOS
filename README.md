@@ -870,7 +870,7 @@ const skins = {
     function actualizarBotonesSkins(){
     const puntos = parseInt(localStorage.getItem("puntos")) || 0;
 
-    document.querySelectorAll(".skin-btn").forEach(btn => {
+    forEach(btn => {
         const tema = btn.getAttribute("onclick")?.match(/'(.+)'/)?.[1];
 
         if(tema && puntos < skins[tema]){
@@ -1061,7 +1061,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lista.appendChild(li);
     });
 
-    actualizarBotonesSkins(); // 👈 ESTE ES CLAVE
+    actualizarBotonesSkins();
 }
 
 
