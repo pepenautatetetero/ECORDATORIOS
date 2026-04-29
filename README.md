@@ -414,11 +414,6 @@ section{
 <ul id="insignias"></ul>
 <h3>Historial</h3>
 <ul id="historial"></ul>
-<h3> Puntos: <span id="puntos">0</span></h3>
-<h3> Nivel: <span id="nivel">Novato</span></h3>
-
-<h3> Insignias</h3>
-<ul id="insignias"></ul>
 
 <h3> Skins desbloqueables</h3>
 
@@ -788,9 +783,7 @@ function siguientePregunta(){
         document.getElementById("juegos").innerHTML = `<h3>Terminaste 🎉</h3><p>Puntaje: ${puntaje}</p>`;
     }
 }
-
-cargarPregunta();
-
+    window.siguientePregunta = siguientePregunta;
 // DRAG & DROP
 const items = document.querySelectorAll(".item");
 const botes = document.querySelectorAll(".bote");
@@ -877,102 +870,96 @@ function verificarInsignias(puntos, racha, insignias){
 // ===== APP =====
 
 document.addEventListener("DOMContentLoaded", function(){
-    
-cargarTema();
 
-const form = document.getElementById("formReciclaje");
-    
-const historialUI = document.getElementById("historial");
-const rachaUI = document.getElementById("racha");
+    cargarTema();
+    cargarPregunta(); // ← SOLO AQUÍ
 
-let registros = JSON.parse(localStorage.getItem("registros")) || [];
-let racha = parseInt(localStorage.getItem("racha")) || 0;
-let ultimaFecha = localStorage.getItem("ultimaFecha") || null;
-let puntos = parseInt(localStorage.getItem("puntos")) || 0;
-let insignias = JSON.parse(localStorage.getItem("insignias")) || [];
+    const form = document.getElementById("formReciclaje");
+    const historialUI = document.getElementById("historial");
+    const rachaUI = document.getElementById("racha");
 
-actualizarUI();
-
-form.addEventListener("submit", function(e){
-    e.preventDefault();
-
-    const tipo = document.getElementById("tipo").value;
-    const sentimiento = document.getElementById("sentimiento").value;
-    const hoy = new Date().toDateString();
-
-    let rachaAnterior = racha;
-
-    // ===== REGISTRO =====
-    registros.push({ tipo, sentimiento, fecha: hoy });
-    localStorage.setItem("registros", JSON.stringify(registros));
-
-    // ===== RACHA =====
-    if(ultimaFecha){
-        let ayer = new Date();
-        ayer.setDate(ayer.getDate() - 1);
-
-        if(new Date(ultimaFecha).toDateString() === ayer.toDateString()){
-            racha++;
-        } else if(new Date(ultimaFecha).toDateString() !== hoy){
-            racha = 1;
-        }
-    } else {
-        racha = 1;
-    }
-
-    ultimaFecha = hoy;
-
-    localStorage.setItem("racha", racha);
-    localStorage.setItem("ultimaFecha", ultimaFecha);
-
-    // ===== PUNTOS =====
-    puntos += 10;
-
-    if(sentimiento === "bien"){
-        puntos += 5;
-    }
-
-    localStorage.setItem("puntos", puntos);
-
-    // ===== INSIGNIAS =====
-    verificarInsignias(puntos, racha, insignias);
-
-    // ===== NOTIFICACIÓN =====
-    if(racha > rachaAnterior){
-        if (Notification.permission !== "granted") {
-            Notification.requestPermission();
-        }
-        notificacionRacha(racha);
-    }
+    let registros = JSON.parse(localStorage.getItem("registros")) || [];
+    let racha = parseInt(localStorage.getItem("racha")) || 0;
+    let ultimaFecha = localStorage.getItem("ultimaFecha") || null;
+    let puntos = parseInt(localStorage.getItem("puntos")) || 0;
+    let insignias = JSON.parse(localStorage.getItem("insignias")) || [];
 
     actualizarUI();
-    form.reset();
+
+    form.addEventListener("submit", function(e){
+        e.preventDefault();
+
+        const tipo = document.getElementById("tipo").value;
+        const sentimiento = document.getElementById("sentimiento").value;
+        const hoy = new Date().toDateString();
+
+        let rachaAnterior = racha;
+
+        registros.push({ tipo, sentimiento, fecha: hoy });
+        localStorage.setItem("registros", JSON.stringify(registros));
+
+        if(ultimaFecha){
+            let ayer = new Date();
+            ayer.setDate(ayer.getDate() - 1);
+
+            if(new Date(ultimaFecha).toDateString() === ayer.toDateString()){
+                racha++;
+            } else if(new Date(ultimaFecha).toDateString() !== hoy){
+                racha = 1;
+            }
+        } else {
+            racha = 1;
+        }
+
+        ultimaFecha = hoy;
+
+        localStorage.setItem("racha", racha);
+        localStorage.setItem("ultimaFecha", ultimaFecha);
+
+        puntos += 10;
+        if(sentimiento === "bien"){
+            puntos += 5;
+        }
+
+        localStorage.setItem("puntos", puntos);
+
+        verificarInsignias(puntos, racha, insignias);
+
+        if(racha > rachaAnterior){
+            if (Notification.permission !== "granted") {
+                Notification.requestPermission();
+            }
+            notificacionRacha(racha);
+        }
+
+        actualizarUI();
+        form.reset();
+    });
+
+    function actualizarUI(){
+        historialUI.innerHTML = "";
+
+        registros.slice().reverse().forEach(r => {
+            const li = document.createElement("li");
+            li.textContent = `${r.fecha} - ${r.tipo} - ${r.sentimiento}`;
+            historialUI.appendChild(li);
+        });
+
+        rachaUI.textContent = racha;
+        document.getElementById("puntos").textContent = puntos;
+        document.getElementById("nivel").textContent = obtenerNivel(puntos);
+
+        const lista = document.getElementById("insignias");
+        lista.innerHTML = "";
+
+        insignias.forEach(i => {
+            const li = document.createElement("li");
+            li.textContent = i;
+            lista.appendChild(li);
+        });
+    }
+
 });
-
-function actualizarUI(){
-    historialUI.innerHTML = "";
-
-    registros.slice().reverse().forEach(r => {
-        const li = document.createElement("li");
-        li.textContent = `${r.fecha} - ${r.tipo} - ${r.sentimiento}`;
-        historialUI.appendChild(li);
-    });
-
-    rachaUI.textContent = racha;
-    document.getElementById("puntos").textContent = puntos;
-    document.getElementById("nivel").textContent = obtenerNivel(puntos);
-
-    const lista = document.getElementById("insignias");
-    lista.innerHTML = "";
-
-    insignias.forEach(i => {
-        const li = document.createElement("li");
-        li.textContent = i;
-        lista.appendChild(li);
-    });
-}
-
-});;
 
 
 </script>
