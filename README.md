@@ -563,49 +563,7 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 </section>
 
 <script>
-fform.addEventListener("submit", function(e){
-    e.preventDefault();
 
-    let rachaAnterior = racha; // 👈 IMPORTANTE
-
-    const tipo = document.getElementById("tipo").value;
-    const sentimiento = document.getElementById("sentimiento").value;
-    const hoy = new Date().toDateString();
-
-    registros.push({ tipo, sentimiento, fecha: hoy });
-    localStorage.setItem("registros", JSON.stringify(registros));
-
-    if(ultimaFecha){
-        let ayer = new Date();
-        ayer.setDate(ayer.getDate() - 1);
-
-        if(new Date(ultimaFecha).toDateString() === ayer.toDateString()){
-            racha++;
-        } else if(new Date(ultimaFecha).toDateString() !== hoy){
-            racha = 1;
-        }
-    } else {
-        racha = 1;
-    }
-
-    ultimaFecha = hoy;
-
-    localStorage.setItem("racha", racha);
-    localStorage.setItem("ultimaFecha", ultimaFecha);
-
-    // 🔔 AQUÍ VA LA NOTIFICACIÓN
-    if(racha > rachaAnterior){
-        if (Notification.permission !== "granted") {
-            Notification.requestPermission();
-        }
-        notificacionRacha(racha);
-    }
-
-    actualizarUI();
-    form.reset();
-});
-    
-    
 // MAPA
 var map = L.map('map').setView([26.0926, -98.2770], 13);
 
@@ -758,16 +716,22 @@ botes.forEach(bote => {
 });
 
 // ===== REGISTRO DE RECICLAJE =====
-
 function notificacionRacha(racha){
-    if (Notification.permission === "granted") {
+    if ("Notification" in window && Notification.permission === "granted") {
         new Notification("♻️ Reciclaje", {
             body: `🔥 Llevas ${racha} días reciclando`,
             icon: "https://cdn-icons-png.flaticon.com/512/2909/2909767.png"
         });
     }
-}    
+}
 
+    if ("Notification" in window) {
+    Notification.requestPermission().then(permission => {
+        if(permission === "granted"){
+            notificacionRacha(racha);
+        }
+    });
+}
 document.addEventListener("DOMContentLoaded", function(){
 
 const form = document.getElementById("formReciclaje");
@@ -780,7 +744,47 @@ let ultimaFecha = localStorage.getItem("ultimaFecha") || null;
 
 actualizarUI();
 
+    form.addEventListener("submit", function(e){
+    e.preventDefault();
 
+    let rachaAnterior = racha;
+
+    const tipo = document.getElementById("tipo").value;
+    const sentimiento = document.getElementById("sentimiento").value;
+    const hoy = new Date().toDateString();
+
+    registros.push({ tipo, sentimiento, fecha: hoy });
+    localStorage.setItem("registros", JSON.stringify(registros));
+
+    if(ultimaFecha){
+        let ayer = new Date();
+        ayer.setDate(ayer.getDate() - 1);
+
+        if(new Date(ultimaFecha).toDateString() === ayer.toDateString()){
+            racha++;
+        } else if(new Date(ultimaFecha).toDateString() !== hoy){
+            racha = 1;
+        }
+    } else {
+        racha = 1;
+    }
+
+    ultimaFecha = hoy;
+
+    localStorage.setItem("racha", racha);
+    localStorage.setItem("ultimaFecha", ultimaFecha);
+
+    // 🔔 NOTIFICACIÓN
+    if(racha > rachaAnterior){
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
+        notificacionRacha(racha);
+    }
+
+    actualizarUI();
+    form.reset();
+});
 function actualizarUI(){
     historialUI.innerHTML = "";
 
