@@ -645,6 +645,26 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 </div>
 </section>
 
+<section id="comentarios">
+<div class="contenedor">
+    <h2>Comentarios 💬</h2>
+
+    <form id="formComentario">
+        <input type="text" id="nombre" placeholder="Tu nombre" required><br><br>
+        <textarea id="mensaje" placeholder="Escribe un comentario..." required></textarea><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <hr>
+
+    <div id="listaComentarios"></div>
+</div>
+</section>
+
+comentarios
+
+
+
 <script type="module">
 
     // ===== FIREBASE IMPORTS (VERSIÓN WEB) =====
@@ -663,6 +683,59 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);    
+
+
+import {
+    collection,
+    addDoc,
+    onSnapshot,
+    query,
+    orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const comentariosRef = collection(db, "comentarios");
+
+// 📤 ENVIAR COMENTARIO
+document.getElementById("formComentario").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombre").value;
+    const mensaje = document.getElementById("mensaje").value;
+
+    await addDoc(comentariosRef, {
+        nombre,
+        mensaje,
+        fecha: Date.now()
+    });
+
+    e.target.reset();
+});
+
+const lista = document.getElementById("listaComentarios");
+
+const q = query(comentariosRef, orderBy("fecha", "desc"));
+
+onSnapshot(q, (snapshot) => {
+    lista.innerHTML = "";
+
+    snapshot.forEach(doc => {
+        const c = doc.data();
+
+        const div = document.createElement("div");
+        div.style.background = "rgba(255,255,255,0.1)";
+        div.style.margin = "10px 0";
+        div.style.padding = "10px";
+        div.style.borderRadius = "10px";
+
+        div.innerHTML = `
+            <b>${c.nombre}</b><br>
+            <p>${c.mensaje}</p>
+        `;
+
+        lista.appendChild(div);
+    });
+});
+
     
 // MAPA
 var map = L.map('map').setView([26.0926, -98.2770], 13);
