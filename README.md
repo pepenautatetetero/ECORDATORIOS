@@ -669,7 +669,14 @@ comentarios
 
     // ===== FIREBASE IMPORTS (VERSIÓN WEB) =====
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    query,
+    orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDw2Ilq75kQrf5trROBqqRyhwgAeMRYQKQ",
@@ -682,19 +689,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);    
-
-
-import {
-    collection,
-    addDoc,
-    onSnapshot,
-    query,
-    orderBy
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const db = getFirestore(app);
 
 const comentariosRef = collection(db, "comentarios");
-
+    
 // 📤 ENVIAR COMENTARIO
 document.getElementById("formComentario").addEventListener("submit", async (e) => {
     e.preventDefault();
