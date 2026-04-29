@@ -854,8 +854,6 @@ const skins = {
     oscuro: 20000
 };
 
-    document.querySelectorAll(".skin-btn")
-
     function cambiarTema(tema){
     const puntos = parseInt(localStorage.getItem("puntos")) || 0;
 
@@ -872,7 +870,7 @@ const skins = {
     function actualizarBotonesSkins(){
     const puntos = parseInt(localStorage.getItem("puntos")) || 0;
 
-    document.querySelectorAll("#registro button").forEach(btn => {
+    document.querySelectorAll(".skin-btn").forEach(btn => {
         const tema = btn.getAttribute("onclick")?.match(/'(.+)'/)?.[1];
 
         if(tema && puntos < skins[tema]){
@@ -989,12 +987,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let insignias = JSON.parse(localStorage.getItem("insignias")) || [];
 
     actualizarUI();
-
+    actualizarBotonesSkins();
+      
     form.addEventListener("submit", function(e){
         e.preventDefault();
 
-    actualizarBotonesSkins();
-        
         const tipo = document.getElementById("tipo").value;
         const sentimiento = document.getElementById("sentimiento").value;
         const hoy = new Date().toDateString();
@@ -1043,29 +1040,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function actualizarUI(){
-        historialUI.innerHTML = "";
+    historialUI.innerHTML = "";
 
-        registros.slice().reverse().forEach(r => {
-            const li = document.createElement("li");
-            li.textContent = `${r.fecha} - ${r.tipo} - ${r.sentimiento}`;
-            historialUI.appendChild(li);
-        });
+    registros.slice().reverse().forEach(r => {
+        const li = document.createElement("li");
+        li.textContent = `${r.fecha} - ${r.tipo} - ${r.sentimiento}`;
+        historialUI.appendChild(li);
+    });
 
-        rachaUI.textContent = racha;
-        document.getElementById("puntos").textContent = puntos;
-        document.getElementById("nivel").textContent = obtenerNivel(puntos);
+    rachaUI.textContent = racha;
+    document.getElementById("puntos").textContent = puntos;
+    document.getElementById("nivel").textContent = obtenerNivel(puntos);
 
-        const lista = document.getElementById("insignias");
-        lista.innerHTML = "";
+    const lista = document.getElementById("insignias");
+    lista.innerHTML = "";
 
-        insignias.forEach(i => {
-            const li = document.createElement("li");
-            li.textContent = i;
-            lista.appendChild(li);
-        });
-    }
+    insignias.forEach(i => {
+        const li = document.createElement("li");
+        li.textContent = i;
+        lista.appendChild(li);
+    });
 
-});
+    actualizarBotonesSkins(); // 👈 ESTE ES CLAVE
+}
 
 
 </script>
