@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Ecordatorios</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -242,89 +241,6 @@ section{
     }
 }
     
-/* 📱 CELULARES */
-@media (max-width: 768px){
-
-    body{
-        font-size: 14px;
-    }
-
-    .header-top{
-        flex-direction: column;
-        text-align: center;
-        padding: 15px;
-    }
-
-    .logos{
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .logos img{
-        width: 60px;
-    }
-
-    .menu{
-        flex-direction: column;
-        gap: 8px;
-        padding: 10px;
-    }
-
-    .menu a{
-        font-size: 14px;
-    }
-
-    .principal{
-        padding: 10px;
-    }
-
-    section{
-        margin: 15px 8px;
-        padding: 20px 15px;
-    }
-
-    .grid{
-        grid-template-columns: 1fr;
-    }
-
-    .item-grande img{
-        height: auto;
-    }
-
-    .zona-juego{
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .botes{
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .bote{
-        min-width: 90px;
-        padding: 10px;
-        font-size: 13px;
-    }
-
-    input, select, textarea{
-        width: 100%;
-        font-size: 14px;
-    }
-
-    button{
-        width: 100%;
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    @media (max-width: 768px){
-    #map{
-        height: 300px;
-    }
-}
 </style>
 </head>
 
