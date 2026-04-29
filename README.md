@@ -81,7 +81,7 @@ body.oscuro {
     background-color: #6c8f5e;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* 👈 importante */
+    flex-wrap: wrap; 
     gap: 20px;
     padding: 15px;
 }
@@ -240,6 +240,69 @@ section{
         transform: translateY(0);
     }
 }
+    
+/* 📱 CELULARES */
+@media (max-width: 768px){
+
+    .header-top{
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .logos img{
+        width: 70px;
+    }
+
+    .menu{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .principal{
+        padding: 20px;
+    }
+
+    .grid{
+        grid-template-columns: 1fr;
+    }
+
+    .item-grande img{
+        height: auto;
+    }
+
+    .zona-juego{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botes{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .bote{
+        min-width: 100px;
+        padding: 10px;
+    }
+
+    section{
+        margin: 20px 10px;
+        padding: 30px 15px;
+    }
+
+    #map{
+        height: 300px;
+    }
+}    
+
+    button{
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    height: auto;
+}
 
 </style>
 </head>
@@ -344,7 +407,11 @@ section{
 </form>
 
 <h3>🔥 Racha actual: <span id="racha">0</span> días</h3>
+<h3>⭐ Puntos: <span id="puntos">0</span></h3>
+<h3>🏆 Nivel: <span id="nivel">Novato</span></h3>
 
+<h3>🎖️ Insignias</h3>
+<ul id="insignias"></ul>
 <h3>Historial</h3>
 <ul id="historial"></ul>
 <h3> Puntos: <span id="puntos">0</span></h3>
@@ -584,8 +651,25 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 </div>
 </section>
 
-<script>
+<script type="module">
 
+    // ===== FIREBASE IMPORTS (VERSIÓN WEB) =====
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDw2Ilq75kQrf5trROBqqRyhwgAeMRYQKQ",
+  authDomain: "ecordatorios.firebaseapp.com",
+  projectId: "ecordatorios",
+  storageBucket: "ecordatorios.firebasestorage.app",
+  messagingSenderId: "872970549143",
+  appId: "1:872970549143:web:42f094e018078d0b9a76d2",
+  measurementId: "G-YFVZ1PMTT1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);    
+    
 // MAPA
 var map = L.map('map').setView([26.0926, -98.2770], 13);
 
