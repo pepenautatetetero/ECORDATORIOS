@@ -814,25 +814,24 @@ botes.forEach(bote => {
     });
 });
 function cambiarTema(tema){
-    document.body.className = tema;
+    document.body.classList.remove("verde", "azul", "oscuro");
+    document.body.classList.add(tema);
     localStorage.setItem("tema", tema);
 }
 
 function cargarTema(){
     const tema = localStorage.getItem("tema") || "verde";
-    document.body.className = tema;
+
+    document.body.classList.remove("verde", "azul", "oscuro");
+    document.body.classList.add(tema);
 }
 
-function desbloquearTema(tema, costo){
-    let puntos = parseInt(localStorage.getItem("puntos")) || 0;
-
-    if(puntos >= costo){
-        cambiarTema(tema);
-        alert("🎉 Tema desbloqueado");
-    } else {
-        alert("❌ Necesitas más puntos");
-    }
-}// ===== REGISTRO DE RECICLAJE =====
+window.cambiarTema = cambiarTema;
+window.desbloquearTema = desbloquearTema;
+    
+}
+    
+// ===== REGISTRO DE RECICLAJE =====
 // ===== FUNCIONES =====
 
 function notificacionRacha(racha){
@@ -872,8 +871,9 @@ function verificarInsignias(puntos, racha, insignias){
 document.addEventListener("DOMContentLoaded", function(){
 
     cargarTema();
-    cargarPregunta(); // ← SOLO AQUÍ
-
+    cargarPregunta(); 
+    cargarTema();
+    
     const form = document.getElementById("formReciclaje");
     const historialUI = document.getElementById("historial");
     const rachaUI = document.getElementById("racha");
