@@ -1,9 +1,10 @@
-nada funciona <!DOCTYPE html>
+no me carga el mapa ni nada de eso <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <title>Ecordatorios</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -241,6 +242,88 @@ section{
     }
 }
     
+/* 📱 CELULARES */
+@media (max-width: 768px){
+
+    body{
+        font-size: 14px;
+    }
+
+    .header-top{
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .logos{
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .logos img{
+        width: 60px;
+    }
+
+    .menu{
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .menu a{
+        font-size: 14px;
+    }
+
+    .principal{
+        padding: 10px;
+    }
+
+    section{
+        margin: 15px 8px;
+        padding: 20px 15px;
+    }
+
+    .grid{
+        grid-template-columns: 1fr;
+    }
+
+    .item-grande img{
+        height: auto;
+    }
+
+    .zona-juego{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botes{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .bote{
+        min-width: 90px;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    input, select, textarea{
+        width: 100%;
+        font-size: 14px;
+    }
+
+    button{
+        width: 100%;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    #map{
+        height: 250px;
+    }
+}
 </style>
 </head>
 
@@ -601,6 +684,9 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 </div>
 </section>
 
+comentarios
+
+
 
 <script type="module">
 
@@ -689,7 +775,53 @@ onSnapshot(q, (snapshot) => {
         lista.appendChild(div);
     });
 });    
+// MAPA
+var map = L.map('map').setView([26.0926, -98.2770], 13);
 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+map.locate({setView: true, maxZoom: 16});
+
+map.on('locationfound', function(e) {
+    L.marker(e.latlng).addTo(map)
+      .bindPopup('Estás aquí 📍')
+      .openPopup();
+});
+
+    // CENTROS DE RECICLAJE EN REYNOSA
+var lugares = [
+    {
+        nombre: "FYMERSA - Centro de metales ♻️",
+        coords: [26.084526395888336, -98.29755461861764],
+        info: "Recibe metales"
+    },
+    {
+        nombre: "CORSA Recicladora ♻️",
+        coords: [26.08932324746204, -98.31992874226934],
+        info: "Materiales ferrosos y no ferrosos"
+    },
+    {
+        nombre: "PLASTIREYSA ♻️",
+        coords: [26.051331045072637, -98.3733933937469],
+        info: "Centro de reciclaje de plástico"
+    }
+];
+
+// AGREGAR MARCADORES
+lugares.forEach(lugar => {
+    L.marker(lugar.coords)
+      .addTo(map)
+      .bindPopup(`<b>${lugar.nombre}</b><br>${lugar.info}`);
+});
+
+var grupo = L.featureGroup(
+    lugares.map(lugar => L.marker(lugar.coords))
+);
+
+map.fitBounds(grupo.getBounds());
+    
 // QUIZ
 const preguntas = [
 {
@@ -844,59 +976,7 @@ function verificarInsignias(puntos, racha, insignias){
 
 // ===== APP =====
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    // MAPA
-var map = L.map('map').setView([26.0926, -98.2770], 13);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
-
-map.locate({setView: true, maxZoom: 16});
-
-map.on('locationfound', function(e) {
-    L.marker(e.latlng).addTo(map)
-      .bindPopup('Estás aquí 📍')
-      .openPopup();
-});
-
-    // CENTROS DE RECICLAJE EN REYNOSA
-var lugares = [
-    {
-        nombre: "FYMERSA - Centro de metales ♻️",
-        coords: [26.084526395888336, -98.29755461861764],
-        info: "Recibe metales"
-    },
-    {
-        nombre: "CORSA Recicladora ♻️",
-        coords: [26.08932324746204, -98.31992874226934],
-        info: "Materiales ferrosos y no ferrosos"
-    },
-    {
-        nombre: "PLASTIREYSA ♻️",
-        coords: [26.051331045072637, -98.3733933937469],
-        info: "Centro de reciclaje de plástico"
-    }
-];
-
-// AGREGAR MARCADORES
-lugares.forEach(lugar => {
-    L.marker(lugar.coords)
-      .addTo(map)
-      .bindPopup(`<b>${lugar.nombre}</b><br>${lugar.info}`);
-});
-
-var grupo = L.featureGroup(
-    lugares.map(lugar => L.marker(lugar.coords))
-);
-
-map.fitBounds(grupo.getBounds());
-
-    const group = L.featureGroup(markers);
-    map.fitBounds(group.getBounds());
-
-});
+document.addEventListener("DOMContentLoaded", function(){
 
     cargarTema();
     cargarPregunta(); 
