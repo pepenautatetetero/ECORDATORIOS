@@ -354,9 +354,9 @@ section{
 
 <h3> Skins desbloqueables</h3>
 
-<button onclick="cambiarTema('verde')">Verde</button>
-<button onclick="cambiarTema('azul')">Azul</button>
-<button onclick="cambiarTema('oscuro')">Oscuro</button>
+<button class="skin-btn" onclick="cambiarTema('verde')">Verde</button>
+<button class="skin-btn" onclick="cambiarTema('azul')">Azul</button>
+<button class="skin-btn" onclick="cambiarTema('oscuro')">Oscuro</button>
 </div>
 </section>
 
@@ -840,11 +840,6 @@ botes.forEach(bote => {
         }
     });
 });
-function cambiarTema(tema){
-    document.body.classList.remove("verde", "azul", "oscuro");
-    document.body.classList.add(tema);
-    localStorage.setItem("tema", tema);
-}
 
 function cargarTema(){
     const tema = localStorage.getItem("tema") || "verde";
@@ -858,6 +853,8 @@ const skins = {
     azul: 10000,
     oscuro: 20000
 };
+
+    document.querySelectorAll(".skin-btn")
 
     function cambiarTema(tema){
     const puntos = parseInt(localStorage.getItem("puntos")) || 0;
@@ -992,8 +989,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let insignias = JSON.parse(localStorage.getItem("insignias")) || [];
 
     actualizarUI();
-
-    
 
     form.addEventListener("submit", function(e){
         e.preventDefault();
