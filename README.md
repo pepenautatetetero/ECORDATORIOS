@@ -702,8 +702,10 @@ document.getElementById("formComentario").addEventListener("submit", async (e) =
     const mensaje = document.getElementById("mensaje").value.trim();
 
     // palabras prohibidas
-    const malasPalabras = ["idiota", "estupido", "tonto", "spam"];
-
+    const malasPalabras = ["Idiota", "Estupido", "Tonto", "Spam", "idiota", "estupido", "tonto", "spam", "puto", "Puto", "Pene", "pene", "Carajo", "carajo", "Pinche", "pinche", "Sexo", "sexo", "Joto", "joto", "Machorra", "machorra", "Pendejo", "pendejo", "Pendeja", "pendeja", "Jochis", "jochis, "Vagina", "vagina", "67", "p3"]
+        
+    
+    
     const contieneMalas = malasPalabras.some(p =>
         mensaje.toLowerCase().includes(p)
     );
