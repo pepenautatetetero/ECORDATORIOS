@@ -320,8 +320,9 @@ section{
         padding: 10px;
     }
 
+    @media (max-width: 768px){
     #map{
-        height: 250px;
+        height: 300px;
     }
 }
 </style>
@@ -722,7 +723,7 @@ document.getElementById("formComentario").addEventListener("submit", async (e) =
     const mensaje = document.getElementById("mensaje").value.trim();
 
     // palabras prohibidas
-    const malasPalabras = ["Idiota", "Estupido", "Tonto", "Spam", "idiota", "estupido", "tonto", "spam", "puto", "Puto", "Pene", "pene", "Carajo", "carajo", "Pinche", "pinche", "Sexo", "sexo", "Joto", "joto", "Machorra", "machorra", "Pendejo", "pendejo", "Pendeja", "pendeja", "Jochis", "jochis, "Vagina", "vagina", "67", "p3"]
+    const malasPalabras = ["Idiota", "Estupido", "Tonto", "Spam", "idiota", "estupido", "tonto", "spam", "puto", "Puto", "Pene", "pene", "Carajo", "carajo", "Pinche", "pinche", "Sexo", "sexo", "Joto", "joto", "Machorra", "machorra", "Pendejo", "pendejo", "Pendeja", "pendeja", "Jochis", "jochis", "Vagina", "vagina", "67", "p3"]
         
     
     
