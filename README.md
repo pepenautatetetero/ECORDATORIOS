@@ -853,6 +853,12 @@ function cargarTema(){
     document.body.classList.add(tema);
 }
 
+const skins = {
+    verde: 0,
+    azul: 10000,
+    oscuro: 20000
+};
+    
 window.cambiarTema = cambiarTema;
 window.cargarTema = cargarTema;
     
@@ -869,9 +875,9 @@ function notificacionRacha(racha){
 }
 
 function obtenerNivel(puntos){
-    if(puntos >= 200) return "🌍 Maestro del Reciclaje";
-    if(puntos >= 100) return "♻️ Experto";
-    if(puntos >= 50) return "🌱 Intermedio";
+    if(puntos >= 30000) return "🌍 Maestro del Reciclaje";
+    if(puntos >= 10000) return "♻️ Experto";
+    if(puntos >= 5000) return "🌱 Intermedio";
     return "🟢 Novato";
 }
 
