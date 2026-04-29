@@ -63,7 +63,7 @@ body.azul {
 
 body.oscuro {
     background: #121212;
-}    
+}
     
 #map{ height: 400px; }
 
@@ -417,10 +417,9 @@ section{
 
 <h3> Skins desbloqueables</h3>
 
-<button onclick="cambiarTema('verde')">🌿 Verde pro</button>
-<button onclick="desbloquearTema('azul', 100)">🌊 Azul Reciclapro(100 pts)</button>
-<button onclick="desbloquearTema('oscuro', 200)">🌙 Oscuro GODDD (200 pts)</button></div>
-</section>
+<button onclick="cambiarTema('verde')">Verde</button>
+<button onclick="cambiarTema('azul')">Azul</button>
+<button onclick="cambiarTema('oscuro')">Oscuro</button>
 
 <!-- SECCIONES -->
 <section id="aprende">
@@ -737,7 +736,7 @@ const preguntas = [
     
     {
     pregunta: "¿Qué pais ocupa el primer lugar del ranking de paises mas comprometidos con el reciclaje?",
-    opciones: ["Alemania", "Japon", "Suiza"],
+    opciones: ["Suiza", "Japon", "Alemania"],
     correcta: 0
 },
 {
@@ -827,9 +826,7 @@ function cargarTema(){
 }
 
 window.cambiarTema = cambiarTema;
-window.desbloquearTema = desbloquearTema;
-    
-}
+window.cargarTema = cargarTema;
     
 // ===== REGISTRO DE RECICLAJE =====
 // ===== FUNCIONES =====
