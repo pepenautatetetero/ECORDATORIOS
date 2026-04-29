@@ -858,6 +858,35 @@ const skins = {
     azul: 10000,
     oscuro: 20000
 };
+
+    function cambiarTema(tema){
+    const puntos = parseInt(localStorage.getItem("puntos")) || 0;
+
+    if(puntos < skins[tema]){
+        alert("🚫 No tienes suficientes puntos para esta skin");
+        return;
+    }
+
+    document.body.classList.remove("verde", "azul", "oscuro");
+    document.body.classList.add(tema);
+    localStorage.setItem("tema", tema);
+}
+
+    function actualizarBotonesSkins(){
+    const puntos = parseInt(localStorage.getItem("puntos")) || 0;
+
+    document.querySelectorAll("#registro button").forEach(btn => {
+        const tema = btn.getAttribute("onclick")?.match(/'(.+)'/)?.[1];
+
+        if(tema && puntos < skins[tema]){
+            btn.disabled = true;
+            btn.style.opacity = "0.5";
+        } else {
+            btn.disabled = false;
+            btn.style.opacity = "1";
+        }
+    });
+}
     
 window.cambiarTema = cambiarTema;
 window.cargarTema = cargarTema;
@@ -964,9 +993,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     actualizarUI();
 
+    
+
     form.addEventListener("submit", function(e){
         e.preventDefault();
 
+    actualizarBotonesSkins();
+        
         const tipo = document.getElementById("tipo").value;
         const sentimiento = document.getElementById("sentimiento").value;
         const hoy = new Date().toDateString();
