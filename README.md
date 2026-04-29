@@ -698,50 +698,10 @@ const comentariosRef = collection(db, "comentarios");
 document.getElementById("formComentario").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const nombre = document.getElementById("nombre").value;
-    const mensaje = document.getElementById("mensaje").value;
-
-    await addDoc(comentariosRef, {
-        nombre,
-        mensaje,
-        fecha: Date.now()
-    });
-
-    e.target.reset();
-});
-
-const lista = document.getElementById("listaComentarios");
-
-const q = query(comentariosRef, orderBy("fecha", "desc"));
-
-onSnapshot(q, (snapshot) => {
-    lista.innerHTML = "";
-
-    snapshot.forEach(doc => {
-        const c = doc.data();
-
-        const div = document.createElement("div");
-        div.style.background = "rgba(255,255,255,0.1)";
-        div.style.margin = "10px 0";
-        div.style.padding = "10px";
-        div.style.borderRadius = "10px";
-
-        div.innerHTML = `
-            <b>${c.nombre}</b><br>
-            <p>${c.mensaje}</p>
-        `;
-
-        lista.appendChild(div);
-    });
-});
-
-document.getElementById("formComentario").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
     const nombre = document.getElementById("nombre").value.trim();
     const mensaje = document.getElementById("mensaje").value.trim();
 
-    // palabras prohibidas (puedes agregar más)
+    // palabras prohibidas
     const malasPalabras = ["idiota", "estupido", "tonto", "spam"];
 
     const contieneMalas = malasPalabras.some(p =>
@@ -765,8 +725,32 @@ document.getElementById("formComentario").addEventListener("submit", async (e) =
     });
 
     e.target.reset();
+});
+
+    const lista = document.getElementById("listaComentarios");
+
+const q = query(comentariosRef, orderBy("fecha", "desc"));
+
+onSnapshot(q, (snapshot) => {
+    lista.innerHTML = "";
+
+    snapshot.forEach(doc => {
+        const c = doc.data();
+
+        const div = document.createElement("div");
+        div.style.background = "rgba(255,255,255,0.1)";
+        div.style.margin = "10px 0";
+        div.style.padding = "10px";
+        div.style.borderRadius = "10px";
+
+        div.innerHTML = `
+            <b>${c.nombre}</b><br>
+            <p>${c.mensaje}</p>
+        `;
+
+        lista.appendChild(div);
+    });
 });    
-    
 // MAPA
 var map = L.map('map').setView([26.0926, -98.2770], 13);
 
