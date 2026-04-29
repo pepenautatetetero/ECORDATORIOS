@@ -10,6 +10,11 @@
 
 <style>
 
+    *{
+    box-sizing: border-box;
+}
+
+    
 #registro form{
     background: #6c8f5e;
     padding: 20px;
@@ -244,23 +249,43 @@ section{
 /* 📱 CELULARES */
 @media (max-width: 768px){
 
+    body{
+        font-size: 14px;
+    }
+
     .header-top{
         flex-direction: column;
         text-align: center;
-        padding: 20px;
+        padding: 15px;
+    }
+
+    .logos{
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
     .logos img{
-        width: 70px;
+        width: 60px;
     }
 
     .menu{
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .menu a{
+        font-size: 14px;
     }
 
     .principal{
-        padding: 20px;
+        padding: 10px;
+    }
+
+    section{
+        margin: 15px 8px;
+        padding: 20px 15px;
     }
 
     .grid{
@@ -283,27 +308,26 @@ section{
     }
 
     .bote{
-        min-width: 100px;
+        min-width: 90px;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    input, select, textarea{
+        width: 100%;
+        font-size: 14px;
+    }
+
+    button{
+        width: 100%;
+        font-size: 14px;
         padding: 10px;
     }
 
-    section{
-        margin: 20px 10px;
-        padding: 30px 15px;
-    }
-
     #map{
-        height: 300px;
+        height: 250px;
     }
-}    
-
-    button{
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    height: auto;
 }
-
 </style>
 </head>
 
