@@ -52,7 +52,19 @@ body{
     font-family: 'Segoe UI', Tahoma, sans-serif;
     background: linear-gradient(180deg, #2e5e2e, #3f6b3f);
 }
+    
+body.verde {
+    background: linear-gradient(180deg, #2e5e2e, #3f6b3f);
+}
 
+body.azul {
+    background: linear-gradient(180deg, #2e4e5e, #3f5f6b);
+}
+
+body.oscuro {
+    background: #121212;
+}    
+    
 #map{ height: 400px; }
 
 .header-top{
@@ -237,7 +249,7 @@ section{
 
 <!-- BLOQUE 1 -->
 <div class="header-top">
-    <h1>RECICLATORIOS</h1>
+    <h1>Ecordatorios</h1>
 
     <div class="logos">
         <img src="https://tse3.mm.bing.net/th/id/OIP.JNYfxsVM5y-gSFeQdWdvngHaHa?rs=1&pid=ImgDetMain&o=7&rm=3">
@@ -253,6 +265,7 @@ section{
     <a href="#objetivo">Nuestro objetivo</a>
     <a href="#conocenos">Conócenos</a>
     <a href="#juegos">Juegos</a>
+    <a href="#registro">Registro de reciclaje</a>
 </div>
 
 <!-- BLOQUE 3 -->
@@ -334,13 +347,17 @@ section{
 
 <h3>Historial</h3>
 <ul id="historial"></ul>
-<h3>⭐ Puntos: <span id="puntos">0</span></h3>
-<h3>🏆 Nivel: <span id="nivel">Novato</span></h3>
+<h3> Puntos: <span id="puntos">0</span></h3>
+<h3> Nivel: <span id="nivel">Novato</span></h3>
 
-<h3>🎖️ Insignias</h3>
+<h3> Insignias</h3>
 <ul id="insignias"></ul>
 
-</div>
+<h3> Skins desbloqueables</h3>
+
+<button onclick="cambiarTema('verde')">🌿 Verde pro</button>
+<button onclick="desbloquearTema('azul', 100)">🌊 Azul Reciclapro(100 pts)</button>
+<button onclick="desbloquearTema('oscuro', 200)">🌙 Oscuro GODDD (200 pts)</button></div>
 </section>
 
 <!-- SECCIONES -->
@@ -719,8 +736,26 @@ botes.forEach(bote => {
         }
     });
 });
+function cambiarTema(tema){
+    document.body.className = tema;
+    localStorage.setItem("tema", tema);
+}
 
-// ===== REGISTRO DE RECICLAJE =====
+function cargarTema(){
+    const tema = localStorage.getItem("tema") || "verde";
+    document.body.className = tema;
+}
+
+function desbloquearTema(tema, costo){
+    let puntos = parseInt(localStorage.getItem("puntos")) || 0;
+
+    if(puntos >= costo){
+        cambiarTema(tema);
+        alert("🎉 Tema desbloqueado");
+    } else {
+        alert("❌ Necesitas más puntos");
+    }
+}// ===== REGISTRO DE RECICLAJE =====
 // ===== FUNCIONES =====
 
 function notificacionRacha(racha){
@@ -758,8 +793,11 @@ function verificarInsignias(puntos, racha, insignias){
 // ===== APP =====
 
 document.addEventListener("DOMContentLoaded", function(){
+    
+cargarTema();
 
 const form = document.getElementById("formReciclaje");
+    
 const historialUI = document.getElementById("historial");
 const rachaUI = document.getElementById("racha");
 
