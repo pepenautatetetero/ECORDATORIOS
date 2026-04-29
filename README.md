@@ -10,10 +10,6 @@
 
 <style>
 
-    *{
-    box-sizing: border-box;
-}
-
     
 #registro form{
     background: #6c8f5e;
