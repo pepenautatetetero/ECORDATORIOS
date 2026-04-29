@@ -607,7 +607,6 @@ comentarios
 
 <script type="module">
 
-    // ===== FIREBASE IMPORTS (VERSIÓN WEB) =====
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
     getFirestore,
@@ -619,373 +618,126 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDw2Ilq75kQrf5trROBqqRyhwgAeMRYQKQ",
+  apiKey: "TU_API_KEY",
   authDomain: "ecordatorios.firebaseapp.com",
   projectId: "ecordatorios",
-  storageBucket: "ecordatorios.firebasestorage.app",
-  messagingSenderId: "872970549143",
-  appId: "1:872970549143:web:42f094e018078d0b9a76d2",
-  measurementId: "G-YFVZ1PMTT1"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 const comentariosRef = collection(db, "comentarios");
-    
-// 📤 ENVIAR COMENTARIO
-document.getElementById("formComentario").addEventListener("submit", async (e) => {
-    e.preventDefault();
 
-    const nombre = document.getElementById("nombre").value.trim();
-    const mensaje = document.getElementById("mensaje").value.trim();
+document.addEventListener("DOMContentLoaded", () => {
 
-    // palabras prohibidas
-    const malasPalabras = ["Idiota", "Estupido", "Tonto", "Spam", "idiota", "estupido", "tonto", "spam", "puto", "Puto", "Pene", "pene", "Carajo", "carajo", "Pinche", "pinche", "Sexo", "sexo", "Joto", "joto", "Machorra", "machorra", "Pendejo", "pendejo", "Pendeja", "pendeja", "Jochis", "jochis", "Vagina", "vagina", "67", "p3"]
-        
-    
-    
-    const contieneMalas = malasPalabras.some(p =>
-        mensaje.toLowerCase().includes(p)
-    );
-
-    if (contieneMalas) {
-        alert("⚠️ Tu comentario contiene lenguaje no permitido.");
-        return;
-    }
-
-    if (mensaje.length < 3) {
-        alert("⚠️ El comentario es muy corto.");
-        return;
-    }
-
-    await addDoc(comentariosRef, {
-        nombre,
-        mensaje,
-        fecha: Date.now()
-    });
-
-    e.target.reset();
-});
-
-    const lista = document.getElementById("listaComentarios");
-
-const q = query(comentariosRef, orderBy("fecha", "desc"));
-
-onSnapshot(q, (snapshot) => {
-    lista.innerHTML = "";
-
-    snapshot.forEach(doc => {
-        const c = doc.data();
-
-        const div = document.createElement("div");
-        div.style.background = "rgba(255,255,255,0.1)";
-        div.style.margin = "10px 0";
-        div.style.padding = "10px";
-        div.style.borderRadius = "10px";
-
-        div.innerHTML = `
-            <b>${c.nombre}</b><br>
-            <p>${c.mensaje}</p>
-        `;
-
-        lista.appendChild(div);
-    });
-});    
-    
-
-// QUIZ
-const preguntas = [
-{
-    pregunta: "¿Qué significan las 3R?",
-    opciones: ["Reciclar, Reducir, Reutilizar", "Reubicar, Reducir, Reciclar", "Reutilizar, Rapidez, Reubicar"],
-    correcta: 0
-},
-{
-    pregunta: "¿Qué es el PET?",
-    opciones: ["Polímero de Energía Térmica", "Polietileno Tereftalato", "Plástico transparente"],
-    correcta: 1
-},
-    {
-    pregunta: "¿Cuantos años tarda una botella de plastico en descomponerse?",
-    opciones: ["100", "10", "500"],
-    correcta: 2
-},
-{
-    pregunta: "¿Cuantas veces el papel puede reciclarse?",
-    opciones: ["7", "2", "5"],
-    correcta: 0
-},
-    
-    {
-    pregunta: "¿Qué pais ocupa el primer lugar del ranking de paises mas comprometidos con el reciclaje?",
-    opciones: ["Suiza", "Japon", "Alemania"],
-    correcta: 0
-},
-{
-    pregunta: "Que pais es el que contamina mas?",
-    opciones: ["India", "China", "Francia"],
-    correcta: 1
-}]
-
-
-let indice = 0;
-let puntaje = 0;
-
-function cargarPregunta(){
-    const p = document.getElementById("pregunta");
-    const op = document.getElementById("opciones");
-    op.innerHTML = "";
-
-    p.textContent = preguntas[indice].pregunta;
-
-    preguntas[indice].opciones.forEach((o,i)=>{
-        const btn = document.createElement("button");
-        btn.textContent = o;
-        btn.onclick = ()=>verificar(i);
-        op.appendChild(btn);
-    });
-}
-
-function verificar(i){
-    const r = document.getElementById("resultado");
-    if(i===preguntas[indice].correcta){
-        r.textContent = "¡Correcto! ✅";
-        puntaje++;
-    } else {
-        r.textContent = "Incorrecto ❌";
-    }
-}
-
-function siguientePregunta(){
-    indice++;
-    if(indice < preguntas.length){
-        cargarPregunta();
-    } else {
-        document.getElementById("juegos").innerHTML = `<h3>Terminaste 🎉</h3><p>Puntaje: ${puntaje}</p>`;
-    }
-}
-    window.siguientePregunta = siguientePregunta;
-// DRAG & DROP
-const items = document.querySelectorAll(".item");
-const botes = document.querySelectorAll(".bote");
-let arrastrado = null;
-
-items.forEach(item => {
-    item.addEventListener("dragstart", () => {
-        arrastrado = item;
-    });
-});
-
-botes.forEach(bote => {
-    bote.addEventListener("dragover", (e) => e.preventDefault());
-
-    bote.addEventListener("drop", () => {
-        const tipoBote = bote.getAttribute("data-tipo");
-        const idItem = arrastrado.id;
-
-        let correcto = idItem.includes(tipoBote);
-        const resultado = document.getElementById("resultadoDrag");
-
-        if(correcto){
-            resultado.textContent = "¡Correcto! ✅";
-            arrastrado.style.display = "none";
-        } else {
-            resultado.textContent = "Incorrecto ❌";
-        }
-    });
-});
-function cambiarTema(tema){
-    document.body.classList.remove("verde", "azul", "oscuro");
-    document.body.classList.add(tema);
-    localStorage.setItem("tema", tema);
-}
-
-function cargarTema(){
-    const tema = localStorage.getItem("tema") || "verde";
-
-    document.body.classList.remove("verde", "azul", "oscuro");
-    document.body.classList.add(tema);
-}
-
-window.cambiarTema = cambiarTema;
-window.cargarTema = cargarTema;
-    
-// ===== REGISTRO DE RECICLAJE =====
-// ===== FUNCIONES =====
-
-function notificacionRacha(racha){
-    if ("Notification" in window && Notification.permission === "granted") {
-        new Notification("♻️ Reciclaje", {
-            body: `🔥 Llevas ${racha} días reciclando`,
-            icon: "https://cdn-icons-png.flaticon.com/512/2909/2909767.png"
-        });
-    }
-}
-
-function obtenerNivel(puntos){
-    if(puntos >= 200) return "🌍 Maestro del Reciclaje";
-    if(puntos >= 100) return "♻️ Experto";
-    if(puntos >= 50) return "🌱 Intermedio";
-    return "🟢 Novato";
-}
-
-function verificarInsignias(puntos, racha, insignias){
-    if(puntos >= 50 && !insignias.includes("🎯 Primeros 50")){
-        insignias.push("🎯 Primeros 50");
-    }
-
-    if(puntos >= 100 && !insignias.includes("💯 Centenario")){
-        insignias.push("💯 Centenario");
-    }
-
-    if(racha >= 7 && !insignias.includes("🔥 7 días seguidos")){
-        insignias.push("🔥 7 días seguidos");
-    }
-
-    localStorage.setItem("insignias", JSON.stringify(insignias));
-}
-
-// ===== APP =====
-
-document.addEventListener("DOMContentLoaded", function(){
-
-    var map = L.map('map').setView([26.0926, -98.2770], 13);
+    // ===== MAPA =====
+    const map = L.map('map').setView([26.0926, -98.2770], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
     map.locate({ setView: true, maxZoom: 16 });
 
-    map.on('locationfound', function (e) {
+    map.on('locationfound', (e) => {
         L.marker(e.latlng).addTo(map)
             .bindPopup('Estás aquí 📍')
             .openPopup();
     });
 
     const lugares = [
-        {
-            nombre: "FYMERSA - Centro de metales ♻️",
-            coords: [26.0845, -98.2975],
-            info: "Recibe metales"
-        },
-        {
-            nombre: "CORSA Recicladora ♻️",
-            coords: [26.0893, -98.3199],
-            info: "Materiales ferrosos y no ferrosos"
-        },
-        {
-            nombre: "PLASTIREYSA ♻️",
-            coords: [26.0513, -98.3733],
-            info: "Centro de plástico"
-        }
+        { nombre:"FYMERSA", coords:[26.0845,-98.2975], info:"Metales" },
+        { nombre:"CORSA", coords:[26.0893,-98.3199], info:"Materiales" },
+        { nombre:"PLASTIREYSA", coords:[26.0513,-98.3733], info:"Plástico" }
     ];
 
-    const markers = lugares.map(lugar => {
-        return L.marker(lugar.coords)
-            .addTo(map)
-            .bindPopup(`<b>${lugar.nombre}</b><br>${lugar.info}`);
+    lugares.forEach(l => {
+        L.marker(l.coords).addTo(map)
+        .bindPopup(`<b>${l.nombre}</b><br>${l.info}`);
     });
 
-    const group = L.featureGroup(markers);
-    map.fitBounds(group.getBounds());
+    // ===== QUIZ =====
+    const preguntas = [
+        { pregunta:"¿Qué significan las 3R?", opciones:["Reciclar, Reducir, Reutilizar","Otra"], correcta:0 },
+    ];
 
-});
+    let indice = 0;
 
-
-    
-    cargarTema();
-    cargarPregunta(); 
-    
-    const form = document.getElementById("formReciclaje");
-    const historialUI = document.getElementById("historial");
-    const rachaUI = document.getElementById("racha");
-
-    let registros = JSON.parse(localStorage.getItem("registros")) || [];
-    let racha = parseInt(localStorage.getItem("racha")) || 0;
-    let ultimaFecha = localStorage.getItem("ultimaFecha") || null;
-    let puntos = parseInt(localStorage.getItem("puntos")) || 0;
-    let insignias = JSON.parse(localStorage.getItem("insignias")) || [];
-
-    actualizarUI();
-
-    form.addEventListener("submit", function(e){
-        e.preventDefault();
-
-        const tipo = document.getElementById("tipo").value;
-        const sentimiento = document.getElementById("sentimiento").value;
-        const hoy = new Date().toDateString();
-
-        let rachaAnterior = racha;
-
-        registros.push({ tipo, sentimiento, fecha: hoy });
-        localStorage.setItem("registros", JSON.stringify(registros));
-
-        if(ultimaFecha){
-            let ayer = new Date();
-            ayer.setDate(ayer.getDate() - 1);
-
-            if(new Date(ultimaFecha).toDateString() === ayer.toDateString()){
-                racha++;
-            } else if(new Date(ultimaFecha).toDateString() !== hoy){
-                racha = 1;
-            }
-        } else {
-            racha = 1;
-        }
-
-        ultimaFecha = hoy;
-
-        localStorage.setItem("racha", racha);
-        localStorage.setItem("ultimaFecha", ultimaFecha);
-
-        puntos += 10;
-        if(sentimiento === "bien"){
-            puntos += 5;
-        }
-
-        localStorage.setItem("puntos", puntos);
-
-        verificarInsignias(puntos, racha, insignias);
-
-        if(racha > rachaAnterior){
-            if (Notification.permission !== "granted") {
-                Notification.requestPermission();
-            }
-            notificacionRacha(racha);
-        }
-
-        actualizarUI();
-        form.reset();
-    });
-
-    function actualizarUI(){
-        historialUI.innerHTML = "";
-
-        registros.slice().reverse().forEach(r => {
-            const li = document.createElement("li");
-            li.textContent = `${r.fecha} - ${r.tipo} - ${r.sentimiento}`;
-            historialUI.appendChild(li);
-        });
-
-        rachaUI.textContent = racha;
-        document.getElementById("puntos").textContent = puntos;
-        document.getElementById("nivel").textContent = obtenerNivel(puntos);
-
-        const lista = document.getElementById("insignias");
-        lista.innerHTML = "";
-
-        insignias.forEach(i => {
-            const li = document.createElement("li");
-            li.textContent = i;
-            lista.appendChild(li);
-        });
+    function cargarPregunta(){
+        document.getElementById("pregunta").textContent = preguntas[indice].pregunta;
     }
 
+    window.siguientePregunta = () => {
+        indice++;
+        cargarPregunta();
+    };
+
+    cargarPregunta();
+
+    // ===== DRAG =====
+    let arrastrado;
+
+    document.querySelectorAll(".item").forEach(i=>{
+        i.addEventListener("dragstart", ()=> arrastrado = i);
+    });
+
+    document.querySelectorAll(".bote").forEach(b=>{
+        b.addEventListener("dragover", e=>e.preventDefault());
+
+        b.addEventListener("drop", ()=>{
+            const correcto = arrastrado.id.includes(b.dataset.tipo);
+            document.getElementById("resultadoDrag").textContent =
+                correcto ? "Correcto ✅" : "Incorrecto ❌";
+        });
+    });
+
+    // ===== TEMA =====
+    window.cambiarTema = (t)=>{
+        document.body.className = t;
+        localStorage.setItem("tema", t);
+    };
+
+    document.body.className = localStorage.getItem("tema") || "verde";
+
+    // ===== REGISTRO =====
+    const form = document.getElementById("formReciclaje");
+    let puntos = parseInt(localStorage.getItem("puntos")) || 0;
+
+    form.addEventListener("submit", e=>{
+        e.preventDefault();
+        puntos += 10;
+        localStorage.setItem("puntos", puntos);
+        document.getElementById("puntos").textContent = puntos;
+    });
+
+    document.getElementById("puntos").textContent = puntos;
+
+    // ===== FIREBASE =====
+    document.getElementById("formComentario").addEventListener("submit", async e=>{
+        e.preventDefault();
+
+        const nombre = document.getElementById("nombre").value;
+        const mensaje = document.getElementById("mensaje").value;
+
+        await addDoc(comentariosRef, {
+            nombre,
+            mensaje,
+            fecha: Date.now()
+        });
+
+        e.target.reset();
+    });
+
+    const lista = document.getElementById("listaComentarios");
+
+    onSnapshot(query(comentariosRef, orderBy("fecha","desc")), snap=>{
+        lista.innerHTML = "";
+        snap.forEach(doc=>{
+            const c = doc.data();
+            lista.innerHTML += `<p><b>${c.nombre}</b>: ${c.mensaje}</p>`;
+        });
+    });
+
 });
-
-
 </script>
     
 </body>
