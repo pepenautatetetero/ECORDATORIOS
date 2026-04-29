@@ -693,7 +693,6 @@ onSnapshot(q, (snapshot) => {
     });
 });    
 // MAPA
-var map = L.map('map').setView([26.0926, -98.2770], 13);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
@@ -870,7 +869,7 @@ const skins = {
     function actualizarBotonesSkins(){
     const puntos = parseInt(localStorage.getItem("puntos")) || 0;
 
-    forEach(btn => {
+    document.querySelectorAll(".skin-btn").forEach(btn => {
         const tema = btn.getAttribute("onclick")?.match(/'(.+)'/)?.[1];
 
         if(tema && puntos < skins[tema]){
@@ -924,8 +923,6 @@ function verificarInsignias(puntos, racha, insignias){
 // ===== APP =====
 
 document.addEventListener("DOMContentLoaded", function(){
-
-document.addEventListener("DOMContentLoaded", () => {
 
     var map = L.map('map').setView([26.0926, -98.2770], 13);
 
@@ -1062,7 +1059,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     actualizarBotonesSkins();
-}
+});
 
 
 </script>
