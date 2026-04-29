@@ -16,6 +16,7 @@
     max-width: 300px;
 }
 
+    
 #registro form{
     background: #6c8f5e;
     padding: 20px;
@@ -34,7 +35,7 @@
     section ul, section ol{
         margin-left: 20px;
     }
-
+    
 .header-top{
     background-color: #a8c3a0;
     display: flex;
@@ -212,8 +213,7 @@ button:hover{
     font-size: 30px;
     color: #c8facc;
     font-weight: bold;
-}
-
+}   
 section{
     animation: aparecer 0.6s ease;
 }
@@ -334,6 +334,11 @@ section{
 
 <h3>Historial</h3>
 <ul id="historial"></ul>
+<h3>⭐ Puntos: <span id="puntos">0</span></h3>
+<h3>🏆 Nivel: <span id="nivel">Novato</span></h3>
+
+<h3>🎖️ Insignias</h3>
+<ul id="insignias"></ul>
 
 </div>
 </section>
@@ -716,6 +721,8 @@ botes.forEach(bote => {
 });
 
 // ===== REGISTRO DE RECICLAJE =====
+// ===== FUNCIONES =====
+
 function notificacionRacha(racha){
     if ("Notification" in window && Notification.permission === "granted") {
         new Notification("♻️ Reciclaje", {
@@ -725,13 +732,31 @@ function notificacionRacha(racha){
     }
 }
 
-    if ("Notification" in window) {
-    Notification.requestPermission().then(permission => {
-        if(permission === "granted"){
-            notificacionRacha(racha);
-        }
-    });
+function obtenerNivel(puntos){
+    if(puntos >= 200) return "🌍 Maestro del Reciclaje";
+    if(puntos >= 100) return "♻️ Experto";
+    if(puntos >= 50) return "🌱 Intermedio";
+    return "🟢 Novato";
 }
+
+function verificarInsignias(puntos, racha, insignias){
+    if(puntos >= 50 && !insignias.includes("🎯 Primeros 50")){
+        insignias.push("🎯 Primeros 50");
+    }
+
+    if(puntos >= 100 && !insignias.includes("💯 Centenario")){
+        insignias.push("💯 Centenario");
+    }
+
+    if(racha >= 7 && !insignias.includes("🔥 7 días seguidos")){
+        insignias.push("🔥 7 días seguidos");
+    }
+
+    localStorage.setItem("insignias", JSON.stringify(insignias));
+}
+
+// ===== APP =====
+
 document.addEventListener("DOMContentLoaded", function(){
 
 const form = document.getElementById("formReciclaje");
@@ -741,21 +766,25 @@ const rachaUI = document.getElementById("racha");
 let registros = JSON.parse(localStorage.getItem("registros")) || [];
 let racha = parseInt(localStorage.getItem("racha")) || 0;
 let ultimaFecha = localStorage.getItem("ultimaFecha") || null;
+let puntos = parseInt(localStorage.getItem("puntos")) || 0;
+let insignias = JSON.parse(localStorage.getItem("insignias")) || [];
 
 actualizarUI();
 
-    form.addEventListener("submit", function(e){
+form.addEventListener("submit", function(e){
     e.preventDefault();
-
-    let rachaAnterior = racha;
 
     const tipo = document.getElementById("tipo").value;
     const sentimiento = document.getElementById("sentimiento").value;
     const hoy = new Date().toDateString();
 
+    let rachaAnterior = racha;
+
+    // ===== REGISTRO =====
     registros.push({ tipo, sentimiento, fecha: hoy });
     localStorage.setItem("registros", JSON.stringify(registros));
 
+    // ===== RACHA =====
     if(ultimaFecha){
         let ayer = new Date();
         ayer.setDate(ayer.getDate() - 1);
@@ -774,7 +803,19 @@ actualizarUI();
     localStorage.setItem("racha", racha);
     localStorage.setItem("ultimaFecha", ultimaFecha);
 
-    // 🔔 NOTIFICACIÓN
+    // ===== PUNTOS =====
+    puntos += 10;
+
+    if(sentimiento === "bien"){
+        puntos += 5;
+    }
+
+    localStorage.setItem("puntos", puntos);
+
+    // ===== INSIGNIAS =====
+    verificarInsignias(puntos, racha, insignias);
+
+    // ===== NOTIFICACIÓN =====
     if(racha > rachaAnterior){
         if (Notification.permission !== "granted") {
             Notification.requestPermission();
@@ -785,6 +826,7 @@ actualizarUI();
     actualizarUI();
     form.reset();
 });
+
 function actualizarUI(){
     historialUI.innerHTML = "";
 
@@ -795,9 +837,22 @@ function actualizarUI(){
     });
 
     rachaUI.textContent = racha;
+    document.getElementById("puntos").textContent = puntos;
+    document.getElementById("nivel").textContent = obtenerNivel(puntos);
+
+    const lista = document.getElementById("insignias");
+    lista.innerHTML = "";
+
+    insignias.forEach(i => {
+        const li = document.createElement("li");
+        li.textContent = i;
+        lista.appendChild(li);
+    });
 }
 
-});
-    </script>
+});;
+
+
+</script>
     
 </body>
