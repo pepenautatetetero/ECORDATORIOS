@@ -648,6 +648,7 @@ Este proyecto no solo representa una actividad académica, sino también una opo
 <section id="comentarios">
 <div class="contenedor">
     <h2>Comentarios 💬</h2>
+    <p> NO DEBES DE COLOCAR PALABRAS MAL SONANTES </p>
 
     <form id="formComentario">
         <input type="text" id="nombre" placeholder="Tu nombre" required><br><br>
@@ -734,6 +735,37 @@ onSnapshot(q, (snapshot) => {
     });
 });
 
+document.getElementById("formComentario").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombre").value.trim();
+    const mensaje = document.getElementById("mensaje").value.trim();
+
+    // palabras prohibidas (puedes agregar más)
+    const malasPalabras = ["idiota", "estupido", "tonto", "spam"];
+
+    const contieneMalas = malasPalabras.some(p =>
+        mensaje.toLowerCase().includes(p)
+    );
+
+    if (contieneMalas) {
+        alert("⚠️ Tu comentario contiene lenguaje no permitido.");
+        return;
+    }
+
+    if (mensaje.length < 3) {
+        alert("⚠️ El comentario es muy corto.");
+        return;
+    }
+
+    await addDoc(comentariosRef, {
+        nombre,
+        mensaje,
+        fecha: Date.now()
+    });
+
+    e.target.reset();
+});    
     
 // MAPA
 var map = L.map('map').setView([26.0926, -98.2770], 13);
