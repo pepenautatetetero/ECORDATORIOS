@@ -357,6 +357,8 @@ section{
 <button onclick="cambiarTema('verde')">Verde</button>
 <button onclick="cambiarTema('azul')">Azul</button>
 <button onclick="cambiarTema('oscuro')">Oscuro</button>
+</div>
+</section>
 
 <!-- SECCIONES -->
 <section id="aprende">
@@ -893,6 +895,53 @@ function verificarInsignias(puntos, racha, insignias){
 
 document.addEventListener("DOMContentLoaded", function(){
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    var map = L.map('map').setView([26.0926, -98.2770], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    map.locate({ setView: true, maxZoom: 16 });
+
+    map.on('locationfound', function (e) {
+        L.marker(e.latlng).addTo(map)
+            .bindPopup('Estás aquí 📍')
+            .openPopup();
+    });
+
+    const lugares = [
+        {
+            nombre: "FYMERSA - Centro de metales ♻️",
+            coords: [26.0845, -98.2975],
+            info: "Recibe metales"
+        },
+        {
+            nombre: "CORSA Recicladora ♻️",
+            coords: [26.0893, -98.3199],
+            info: "Materiales ferrosos y no ferrosos"
+        },
+        {
+            nombre: "PLASTIREYSA ♻️",
+            coords: [26.0513, -98.3733],
+            info: "Centro de plástico"
+        }
+    ];
+
+    const markers = lugares.map(lugar => {
+        return L.marker(lugar.coords)
+            .addTo(map)
+            .bindPopup(`<b>${lugar.nombre}</b><br>${lugar.info}`);
+    });
+
+    const group = L.featureGroup(markers);
+    map.fitBounds(group.getBounds());
+
+});
+
+
+    
     cargarTema();
     cargarPregunta(); 
     cargarTema();
